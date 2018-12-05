@@ -70,8 +70,8 @@
                     <div id="menu">
                         <ul class="menu">
                             <li><a href="#about" title="什麼是產銷履歷" data-scroll="about">什麼是產銷履歷</a> </li>
-                            <li><a href="#core" title="什麼是區塊鏈" data-scroll="core">什麼是區塊鏈</a> </li>
-                            <li><a href="/" title="如何加入產銷履歷">如何加入產銷履歷</a> </li>
+                            <li><a href="#!core" title="什麼是區塊鏈" data-scroll="core">什麼是區塊鏈</a> </li>
+                            <li><a href="#banner" title="如何加入產銷履歷" data-scroll="banner">如何加入產銷履歷</a> </li>
                             <li><a href="{{ route('resumes.inquery') }}" title="履歷查询">履歷查询</a> </li>
                             <li><a href="{{ route('resumes.index') }}" title="最新履歷">最新履歷</a></li>
                         </ul>

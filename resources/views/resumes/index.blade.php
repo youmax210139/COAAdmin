@@ -18,7 +18,10 @@
     <style>
     .no_results{
         text-align: center;
-    }    
+    }
+    #m_nav .menu li.active a{
+            color:#2f6358;
+        }    
     </style>
 </head>
 
@@ -38,9 +41,9 @@
                 <div id="m_nav">
                     <div id="menu">
                         <ul class="menu">
-                            <li><a href="/" title="什麼是產銷履歷">什麼是產銷履歷</a> </li>
-                            <li><a href="/" title="什麼是區塊鏈">什麼是區塊鏈</a> </li>
-                            <li><a href="/" title="如何加入產銷履歷">如何加入產銷履歷</a> </li>
+                        <li><a href="{{ route('homes.index','#about') }}" title="什麼是產銷履歷">什麼是產銷履歷</a> </li>
+                            <li><a href="{{ route('homes.index','#core') }}" title="什麼是區塊鏈">什麼是區塊鏈</a> </li>
+                            <li><a href="{{ route('homes.index','#banner') }}" title="如何加入產銷履歷">如何加入產銷履歷</a> </li>
                             <li><a href="{{ route('resumes.inquery') }}" title="履歷查询">履歷查询</a> </li>
                             <li class="active"><a href="{{ route('resumes.index') }}" title="最新履歷">最新履歷</a></li>
                         </ul>
