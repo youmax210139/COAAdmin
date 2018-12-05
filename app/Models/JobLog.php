@@ -11,4 +11,9 @@ class JobLog extends Model
         'definition' => 'array',
         'serials' => 'array',
     ];
+
+    protected $dates = [
+        'client_side_timestamp',
+        'created_at',
+    ];
 }

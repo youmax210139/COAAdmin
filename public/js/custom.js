@@ -1,6 +1,7 @@
 //手機三條線選單
 $(document).ready(function() {
     $("#rwd_nav").click(function() {
+        $("#m_nav .bars_close").show();
         $(this).toggleClass("active");
     });
     $("#m_nav .bars_close").click(function() {
@@ -22,3 +23,11 @@ function rwd_fun() {
         $('#rwd_nav').before($('#header_logo'));
     }
 }
+
+$(document).ready(function(){
+    $('#m_nav a').click(function(){
+        $("#rwd_nav").removeClass("active");
+        $("#m_nav .bars_close").hide();
+        $.pageslide.close();
+    });
+})

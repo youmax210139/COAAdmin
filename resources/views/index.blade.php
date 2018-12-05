@@ -69,8 +69,8 @@
                 <div id="m_nav">
                     <div id="menu">
                         <ul class="menu">
-                            <li><a href="/" title="什麼是產銷履歷">什麼是產銷履歷</a> </li>
-                            <li><a href="/" title="什麼是區塊鏈">什麼是區塊鏈</a> </li>
+                            <li><a href="#about" title="什麼是產銷履歷" data-scroll="about">什麼是產銷履歷</a> </li>
+                            <li><a href="#core" title="什麼是區塊鏈" data-scroll="core">什麼是區塊鏈</a> </li>
                             <li><a href="/" title="如何加入產銷履歷">如何加入產銷履歷</a> </li>
                             <li><a href="{{ route('resumes.inquery') }}" title="履歷查询">履歷查询</a> </li>
                             <li><a href="{{ route('resumes.index') }}" title="最新履歷">最新履歷</a></li>
@@ -162,6 +162,7 @@
     <script src="{{ asset('js/jquery-1.11.3.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/jquery_pageslide_min.js') }}"></script>
+    <script src="{{ asset('js/smartScroll.min.js') }}"></script>
     <script>
         $(document).ready(function () {
             $("#rwd_nav").pageslide({
@@ -169,6 +170,18 @@
             });
         });
 
+        (function ($) {
+            "use strict";
+            // all parameters are optional
+            smartScroll.init({
+                speed: 700, // default 500
+                addActive: true, // default true
+                activeClass: "active", // default active
+                offset: 150 // default 100
+            }, function () {
+            });
+        })(jQuery);
+    
     </script>
 </body>
 

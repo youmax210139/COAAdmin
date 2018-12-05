@@ -10,7 +10,7 @@ class ResumeController extends Controller
     public function index()
     {
         $lists = JobLog::selectRaw('id,
-            client_side_timestamp as date,
+            to_char(client_side_timestamp, \'YYYY-MM-DD HH24:MI:SS\') as date,
             definition->>\'name\' as task,
             serials->1->>\'name\' as operator,
             serials->2->>\'name\' as tool,
@@ -34,7 +34,7 @@ class ResumeController extends Controller
     public function search(Request $request)
     {
         $lists = JobLog::selectRaw('id,
-                  client_side_timestamp as date,
+                  to_char(client_side_timestamp, \'YYYY-MM-DD HH24:MI:SS\') as date,
                   definition->>\'name\' as task,
                   serials->1->>\'name\' as operator,
                   serials->2->>\'name\' as tool,

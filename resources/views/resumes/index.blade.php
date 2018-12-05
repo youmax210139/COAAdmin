@@ -15,6 +15,11 @@
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/animate_min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <style>
+    .no_results{
+        text-align: center;
+    }    
+    </style>
 </head>
 
 <body id="page" class="resumeInfo">
@@ -37,7 +42,7 @@
                             <li><a href="/" title="什麼是區塊鏈">什麼是區塊鏈</a> </li>
                             <li><a href="/" title="如何加入產銷履歷">如何加入產銷履歷</a> </li>
                             <li><a href="{{ route('resumes.inquery') }}" title="履歷查询">履歷查询</a> </li>
-                            <li><a href="{{ route('resumes.index') }}" title="最新履歷">最新履歷</a></li>
+                            <li class="active"><a href="{{ route('resumes.index') }}" title="最新履歷">最新履歷</a></li>
                         </ul>
                     </div>
                     <a href="javascript:$.pageslide.close()" class="bars_close"></a>
@@ -76,26 +81,27 @@
                     </form>
                 </div>
             </section>
+            @if($lists->isEmpty())
+            <p class="no_results">查詢無結果</p>
+            @else
             <section id="verification">
-                @forelse($lists as $l)
+                @foreach($lists as $l)
                 <div class="vfc_box">
                     {{-- <div class="close"><span>×</span></div> --}}
                     <div class="date">{{ $l->date }}</div>
                     <div class="vfc_btn no">未驗證</div>
                     <div class="vfc_txt">
-                        <p class="project">作業日期:{{ $l->date }}</p>
                         <p class="project">作業項目:{{ $l->task }}</p>
-                        <p class="operators">作業人員:採後處理場所:{{ $l->operator }}</p>
+                        <p class="operators">作業場域:{{ $l->operator }}</p>
                         <p class="tool">工具:{{ $l->tool }}</p>
                         <p class="yield">收穫量:{{ $l->haversting }}</p>
-                        <p class="yield">茶種:{{ $l->tea_id }}</p>
+                        <p class="yield">茶種ID:{{ $l->tea_id }}</p>
                         <p class="yield">說明:{{ $l->explain }}</p>
                     </div>
                 </div>
-                @empty
-                    <p>查詢後無結果</p>
-                @endforelse
+                @endforeach
             </section>
+            @endif
             <div class="back_btn"><a href="{{ route('resumes.inquery') }}">返回</a></div>
         </div>
     </main>
