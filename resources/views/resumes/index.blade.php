@@ -12,9 +12,9 @@
     <meta name="keywords" content="">
     <meta name="author" content="農業產品產銷履歷區塊鏈資訊網">
     <!--Web css-->
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="css/animate_min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/animate_min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 
 <body id="page" class="resumeInfo">
@@ -24,7 +24,11 @@
     <!--上版-->
     <header id="header">
         <div class="inner">
-            <div id="header_logo"> <a href="index.html"><img src="images/logo.svg" alt="農業產品產銷履歷區塊鏈資訊網"></a> </div>
+            <div id="header_logo">
+                <a href="{{route('homes.index')}}">
+                    <img src="{{ asset('images/logo.svg') }}" alt="農業產品產銷履歷區塊鏈資訊網">
+                </a>
+            </div>
             <nav id="header_nav">
                 <div id="m_nav">
                     <div id="menu">
@@ -41,7 +45,10 @@
             </nav>
         </div>
     </header>
-    <div id="banner"><img src="images/page_banner.svg"><span class="txt">履歷資訊</span></div>
+    <div id="banner">
+        <img src="{{ asset('images/page_banner.svg') }}">
+        <span class="txt">履歷資訊</span>
+    </div>
     <main id="main">
         <div class="inner">
             <section id="rsu_info">
@@ -136,9 +143,9 @@
         </div>
     </footer>
     <!--Web jquery-->
-    <script src="js/jquery-1.11.3.js"></script>
-    <script src="js/custom.js" type="text/javascript"></script>
-    <script src="js/jquery_pageslide_min.js"></script>
+    <script src="{{ asset('js/jquery-1.11.3.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/jquery_pageslide_min.js') }}"></script>
     <script>
         $(document).ready(function () {
             $("#rwd_nav").pageslide({

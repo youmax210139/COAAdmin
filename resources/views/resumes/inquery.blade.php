@@ -24,7 +24,10 @@
     <!--上版-->
     <header id="header">
         <div class="inner">
-            <div id="header_logo"> <a href="index.html"><img src="{{ asset('images/logo.svg') }}" alt="農業產品產銷履歷區塊鏈資訊網"></a>
+            <div id="header_logo">
+                <a href="{{route('homes.index')}}">
+                    <img src="{{ asset('images/logo.svg') }}" alt="農業產品產銷履歷區塊鏈資訊網">
+                </a>
             </div>
             <nav id="header_nav">
                 <div id="m_nav">
@@ -49,10 +52,11 @@
                     <h1><span>履歷查詢</span></h1>
                 </div>
                 <div class="con">
-                    <form action="" method="get">
+                    <form action="{{ route('resumes.search') }}" method="post">
+                        @csrf
                         <div class="form_group">
                             <label for="select_teaField">茶園場域</label>
-                            <select class="form-control" id="select_teaField">
+                            <select class="form-control" id="select_teaField" name="location">
                                 @foreach($locations as $key=>$val)
                                 <option value="{{ $key }}">{{ str_replace('"', '', $val) }}</option>
                                 @endforeach
@@ -60,7 +64,7 @@
                         </div>
                         <div class="form_group">
                             <label for="select_cropNum">作物批號</label>
-                            <select class="form-control" id="select_cropNum">
+                            <select class="form-control" id="select_cropNum" name="crop">
                                 @foreach($crops as $key=>$val)
                                 <option value="{{ $key }}">{{ str_replace('"', '', $val) }}</option>
                                 @endforeach
@@ -88,9 +92,9 @@
         </div>
     </footer>
     <!--Web jquery-->
-    <script src="/js/jquery-1.11.3.js"></script>
-    <script src="/js/custom.js" type="text/javascript"></script>
-    <script src="/js/jquery_pageslide_min.js"></script>
+    <script src="{{ asset('js/jquery-1.11.3.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/jquery_pageslide_min.js') }}"></script>
     <script>
         $(document).ready(function () {
             $("#rwd_nav").pageslide({

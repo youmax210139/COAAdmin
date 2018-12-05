@@ -12,9 +12,9 @@
     <meta name="keywords" content="">
     <meta name="author" content="農業產品產銷履歷區塊鏈資訊網">
     <!--Web css-->
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="css/animate_min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/animate_min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <style>
         #core .con {
           color: #666666;
@@ -60,7 +60,11 @@
     <!--上版-->
     <header id="header">
         <div class="inner">
-            <div id="header_logo"> <a href="index.html"><img src="images/logo.svg" alt="農業產品產銷履歷區塊鏈資訊網"></a> </div>
+            <div id="header_logo">
+                <a href="index.html">
+                    <img src="images/logo.svg" alt="農業產品產銷履歷區塊鏈資訊網">
+                </a>
+            </div>
             <nav id="header_nav">
                 <div id="m_nav">
                     <div id="menu">
@@ -128,18 +132,18 @@
                             <p>傳統的資料庫由單一的伺服器所控制，區塊鏈則由所有參與的節點共同維護</p>
                         </li>
                         <li>
-                          <a href="#"><span class="img">
-                            <img src="images/core_img03.svg"></span>
-                            <span class="txt">無法竄改</span>
-                          </a>
-                          <p>透過密碼學的機制，可以驗證資料的正確性</p>
+                            <a href="#"><span class="img">
+                                    <img src="images/core_img03.svg"></span>
+                                <span class="txt">無法竄改</span>
+                            </a>
+                            <p>透過密碼學的機制，可以驗證資料的正確性</p>
                         </li>
                         <li>
-                          <a href="#"><span class="img">
-                            <img src="images/core_img04.svg"></span>
-                            <span class="txt">資料透明</span>
-                          </a>
-                          <p>資料都是透明的，任何人都可以取得區塊鏈上的資料</p>
+                            <a href="#"><span class="img">
+                                    <img src="images/core_img04.svg"></span>
+                                <span class="txt">資料透明</span>
+                            </a>
+                            <p>資料都是透明的，任何人都可以取得區塊鏈上的資料</p>
                         </li>
                     </ul>
                 </div>
@@ -155,9 +159,9 @@
         </div>
     </footer>
     <!--Web jquery-->
-    <script src="js/jquery-1.11.3.js"></script>
-    <script src="js/custom.js" type="text/javascript"></script>
-    <script src="js/jquery_pageslide_min.js"></script>
+    <script src="{{ asset('js/jquery-1.11.3.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/jquery_pageslide_min.js') }}"></script>
     <script>
         $(document).ready(function () {
             $("#rwd_nav").pageslide({
