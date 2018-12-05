@@ -51,6 +51,7 @@
     </div>
     <main id="main">
         <div class="inner">
+            <!--
             <section id="rsu_info">
                 <div class="info_box">
                     <p class="pro_name"><span>產品名稱</span><em>茶葉-奇萊58冷香(奇萊58冷香)</em></p>
@@ -64,6 +65,7 @@
                     <p class="quantity"><span>數量</span><em>500斤</em></p>
                 </div>
             </section>
+            -->
             <section id="search">
                 <div class="search_box">
                     <form action="" method="get" autocomplete="off">
@@ -75,61 +77,22 @@
                 </div>
             </section>
             <section id="verification">
+                @foreach($lists as $l)
                 <div class="vfc_box">
-                    <div class="close"><span>×</span></div>
-                    <div class="date">2019-01-03</div>
+                    {{-- <div class="close"><span>×</span></div> --}}
+                    <div class="date">{{ $l->date }}</div>
                     <div class="vfc_btn no">未驗證</div>
                     <div class="vfc_txt">
-                        <p class="project">作業項目:炒菁</p>
-                        <p class="operators">作業人員:採後處理場所:順美茶廠</p>
-                        <p class="tool">工具:人工</p>
-                        <p class="yield">收穫量:500</p>
+                        <p class="project">作業日期:{{ $l->date }}</p>
+                        <p class="project">作業項目:{{ $l->task }}</p>
+                        <p class="operators">作業人員:採後處理場所:{{ $l->operator }}</p>
+                        <p class="tool">工具:{{ $l->tool }}</p>
+                        <p class="yield">收穫量:{{ $l->haversting }}</p>
+                        <p class="yield">茶種:{{ $l->tea_id }}</p>
+                        <p class="yield">說明:{{ $l->explain }}</p>
                     </div>
                 </div>
-                <div class="vfc_box">
-                    <div class="close"><span>×</span></div>
-                    <div class="date">2019-01-11</div>
-                    <div class="vfc_btn ok">已驗證</div>
-                    <div class="vfc_txt">
-                        <p class="project">作業項目:發酵</p>
-                        <p class="operators">作業人員:採後處理場所:順美茶廠</p>
-                        <p class="tool">工具:人工</p>
-                        <p class="yield">收穫量:500</p>
-                    </div>
-                </div>
-                <div class="vfc_box">
-                    <div class="close"><span>×</span></div>
-                    <div class="date">2019-01-19</div>
-                    <div class="vfc_btn ok">已驗證</div>
-                    <div class="vfc_txt">
-                        <p class="project">作業項目:揉捻</p>
-                        <p class="operators">作業人員:採後處理場所:順美茶廠</p>
-                        <p class="tool">工具:人工</p>
-                        <p class="yield">收穫量:500</p>
-                    </div>
-                </div>
-                <div class="vfc_box">
-                    <div class="close"><span>×</span></div>
-                    <div class="date">2019-01-19</div>
-                    <div class="vfc_btn ok">已驗證</div>
-                    <div class="vfc_txt">
-                        <p class="project">作業項目:萎凋</p>
-                        <p class="operators">作業人員:採後處理場所:順美茶廠</p>
-                        <p class="tool">工具:人工</p>
-                        <p class="yield">收穫量:500</p>
-                    </div>
-                </div>
-                <div class="vfc_box">
-                    <div class="close"><span>×</span></div>
-                    <div class="date">2019-01-19</div>
-                    <div class="vfc_btn ok">已驗證</div>
-                    <div class="vfc_txt">
-                        <p class="project">作業項目:布球成型</p>
-                        <p class="operators">作業人員:採後處理場所:順美茶廠</p>
-                        <p class="tool">工具:人工</p>
-                        <p class="yield">收穫量:500</p>
-                    </div>
-                </div>
+                @endforeach
             </section>
             <div class="back_btn"><a href="#">返回</a></div>
         </div>

@@ -9,7 +9,8 @@ class ResumeController extends Controller
 {
     public function index()
     {
-        return view('resumes.index');
+        $lists = [];
+        return view('resumes.index', compact(['lists']));
     }
 
     public function inquery()
