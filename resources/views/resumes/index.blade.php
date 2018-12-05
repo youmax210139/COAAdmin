@@ -77,7 +77,7 @@
                 </div>
             </section>
             <section id="verification">
-                @foreach($lists as $l)
+                @forelse($lists as $l)
                 <div class="vfc_box">
                     {{-- <div class="close"><span>×</span></div> --}}
                     <div class="date">{{ $l->date }}</div>
@@ -92,9 +92,11 @@
                         <p class="yield">說明:{{ $l->explain }}</p>
                     </div>
                 </div>
-                @endforeach
+                @empty
+                    <p>查詢後無結果</p>
+                @endforelse
             </section>
-            <div class="back_btn"><a href="#">返回</a></div>
+            <div class="back_btn"><a href="{{ route('resumes.inquery') }}">返回</a></div>
         </div>
     </main>
     <!--下版-->
