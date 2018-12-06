@@ -62,6 +62,7 @@
                         <div class="form_group">
                             <label for="select_teaField">茶園場域</label>
                             <select class="form-control" id="select_teaField" name="location">
+                                <option value=''>請選擇</option>
                                 @foreach($locations as $key=>$val)
                                 <option value="{{ $key }}">{{ str_replace('"', '', $val) }}</option>
                                 @endforeach
@@ -70,6 +71,7 @@
                         <div class="form_group">
                             <label for="select_cropNum">作物批號</label>
                             <select class="form-control" id="select_cropNum" name="crop">
+                                <option value=''>請選擇</option>
                                 @foreach($crops as $key=>$val)
                                 <option value="{{ $key }}">{{ str_replace('"', '', $val) }}</option>
                                 @endforeach
@@ -105,6 +107,11 @@
             $("#rwd_nav").pageslide({
                 modal: true
             });
+            $('.reset_btn').click(function(e){
+                e.preventDefault();
+                $("#select_teaField").val($("#select_teaField option:first").val());
+                $("#select_cropNum").val($("#select_cropNum option:first").val());
+            })
         });
 
     </script>
