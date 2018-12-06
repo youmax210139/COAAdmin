@@ -12,6 +12,6 @@
 */
 Route::get('/', 'HomeController@index')->name('homes.index');
 Route::get('/resumes', 'ResumeController@index')->name('resumes.index');
-Route::get('/resumes/inquire', 'ResumeController@inquery')->name('resumes.inquery');
+Route::get('/resumes/inquiry', 'ResumeController@inquiry')->name('resumes.inquiry');
 
 Route::post('/resumes/search', 'ResumeController@search')->name('resumes.search');

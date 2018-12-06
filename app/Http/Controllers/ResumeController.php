@@ -11,9 +11,10 @@ use Psr\Http\Message\ResponseInterface;
 
 class ResumeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $lists = JobLog::selectRaw('id,
+        $latest = !session()->has('lists');
+        $lists = session('lists') ?? JobLog::selectRaw('id,
         to_char(client_side_timestamp, \'YYYY-MM-DD HH24:MI:SS\') as date,
         (select serials -> i ->> \'name\' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>\'type\')= \'作物批號\' ) as harvesting,
         definition ->> \'name\' as task,
@@ -27,10 +28,10 @@ class ResumeController extends Controller
             ->get();
         $this->validJobLogsByCheckIds($lists);
         // dd($lists);
-        return view('resumes.info', compact(['lists']));
+        return view('resumes.info', compact(['lists', 'latest']));
     }
 
-    public function inquery()
+    public function inquiry()
     {
         $crops = JobLog::selectRaw('DISTINCT
                 (select serials -> i ->> \'name\' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>\'type\')= \'作物批號\' ) as harvesting,
@@ -44,7 +45,7 @@ class ResumeController extends Controller
                 ')
             ->orderby('operator')
             ->pluck('operator', 'value');
-        return view('resumes.inquery', compact(['crops', 'operators']));
+        return view('resumes.inquiry', compact(['crops', 'operators']));
     }
 
     public function search(Request $request)
@@ -68,7 +69,7 @@ class ResumeController extends Controller
         }
         $lists = $builder->get();
         $this->validJobLogsByCheckIds($lists);
-        return view('resumes.info', compact(['lists']));
+        return redirect()->route('resumes.index')->with('lists', $lists);
     }
 
     protected function validJobLogsByCheckId($jobLogs)

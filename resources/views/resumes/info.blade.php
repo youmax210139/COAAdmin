@@ -41,8 +41,8 @@
                             <li><a href="{{ route('homes.index','#about') }}" title="什麼是產銷履歷">什麼是產銷履歷</a> </li>
                             <li><a href="{{ route('homes.index','#core') }}" title="什麼是區塊鏈">什麼是區塊鏈</a> </li>
                             <li><a href="{{ route('homes.index','#banner') }}" title="如何加入產銷履歷">如何加入產銷履歷</a> </li>
-                            <li><a href="{{ route('resumes.inquery') }}" title="履歷查詢">履歷查詢</a> </li>
-                            <li class="active"><a href="{{ route('resumes.index') }}" title="最新履歷">最新履歷</a></li>
+                            <li><a href="{{ route('resumes.inquiry') }}" title="履歷查詢">履歷查詢</a> </li>
+                            <li class="{{ $latest?'active':'' }}"><a href="{{ route('resumes.index') }}" title="最新履歷">最新履歷</a></li>
                         </ul>
                     </div>
                     <a href="javascript:$.pageslide.close()" class="bars_close"></a>
@@ -52,7 +52,7 @@
     </header>
     <div id="banner">
         <img src="{{ asset('images/page_banner.svg') }}">
-        <span class="txt">履歷資訊</span>
+        <span class="txt">{{ $latest?'最新履歷':'履歷資訊' }}</span>
     </div>
     <main id="main">
         <div class="inner">
@@ -105,7 +105,7 @@
                 @endforeach
             </section>
             @endif
-            <div class="back_btn"><a href="{{ route('resumes.inquery') }}">返回</a></div>
+            <div class="back_btn"><a href="{{ route('resumes.inquiry') }}">返回</a></div>
         </div>
     </main>
     <!--下版-->
