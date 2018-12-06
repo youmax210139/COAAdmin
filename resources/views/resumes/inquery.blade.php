@@ -61,16 +61,16 @@
                         @csrf
                         <div class="form_group">
                             <label for="select_teaField">茶園場域</label>
-                            <select class="form-control" id="select_teaField" name="location">
+                            <select class="form-control" id="select_teaField" name="operator">
                                 <option value=''>請選擇</option>
-                                @foreach($locations as $key=>$val)
+                                @foreach($operators as $key=>$val)
                                 <option value="{{ $key }}">{{ str_replace('"', '', $val) }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form_group">
                             <label for="select_cropNum">作物批號</label>
-                            <select class="form-control" id="select_cropNum" name="crop">
+                            <select class="form-control" id="select_cropNum" name="harvesting">
                                 <option value=''>請選擇</option>
                                 @foreach($crops as $key=>$val)
                                 <option value="{{ $key }}">{{ str_replace('"', '', $val) }}</option>
