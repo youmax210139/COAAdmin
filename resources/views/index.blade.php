@@ -83,11 +83,10 @@
                 <div class="img"><img src="images/banner_img.svg"></div>
                 <div class="info">
                     <div class="txt">
-                        <h2>產銷履歷加菜金隆重登場</h2>
-                        <p>獎金獎品再升級</p>
-                        <p>一年一度走過路過千萬別錯過</p>
-                        <p>買越多鐘獎機會多更多</p>
-                        <p>手刀火速參加</p>
+                        <h2>有機農業好處多</h2>
+                        <p>吃的安心</p>
+                        <p>對環境友善</p>
+                        <p>沒有農藥殘留</p>
                     </div>
                     <div class="search_box">
                         <form action="" method="get" autocomplete="off">
