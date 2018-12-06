@@ -10,13 +10,13 @@ class ResumeController extends Controller
     public function index()
     {
         $lists = JobLog::selectRaw('id,
-            to_char(client_side_timestamp, \'YYYY-MM-DD HH24:MI:SS\') as date,
-            definition->>\'name\' as task,
-            serials->1->>\'name\' as operator,
-            serials->2->>\'name\' as tool,
-            serials->0->>\'name\' as haversting,
-            serials->0->>\'value\' as tea_id,
-            serials->2->>\'type\' as explain
+        to_char(client_side_timestamp, \'YYYY-MM-DD HH24:MI:SS\') as date,
+        (select serials -> i ->> \'name\' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>\'type\')= \'作物批號\' ) as harvesting,
+        definition ->> \'name\' as task,
+        (select serials -> i ->> \'name\' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>\'type\')= \'茶園場域\' ) as operator,
+        (select serials -> i ->> \'name\' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>\'type\' != \'作物批號\' AND serials->i->>\'type\' != \'茶園場域\')) as tool,
+        serials->0->>\'value\' as tea_id,
+        (select serials -> i ->> \'type\' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>\'type\' != \'作物批號\' AND serials->i->>\'type\' != \'茶園場域\')) as explain
         ')
         ->orderby('created_at', 'desc')
         ->limit(3)
@@ -35,12 +35,12 @@ class ResumeController extends Controller
     {
         $lists = JobLog::selectRaw('id,
                   to_char(client_side_timestamp, \'YYYY-MM-DD HH24:MI:SS\') as date,
-                  definition->>\'name\' as task,
-                  serials->1->>\'name\' as operator,
-                  serials->2->>\'name\' as tool,
-                  serials->0->>\'name\' as haversting,
+                  (select serials -> i ->> \'name\' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>\'type\')= \'作物批號\' ) as harvesting,
+                  definition ->> \'name\' as task,
+                  (select serials -> i ->> \'name\' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>\'type\')= \'茶園場域\' ) as operator,
+                  (select serials -> i ->> \'name\' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>\'type\' != \'作物批號\' AND serials->i->>\'type\' != \'茶園場域\')) as tool,
                   serials->0->>\'value\' as tea_id,
-                  serials->2->>\'type\' as explain
+                  (select serials -> i ->> \'type\' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>\'type\' != \'作物批號\' AND serials->i->>\'type\' != \'茶園場域\')) as explain
                   ')
             ->whereRaw("serials->0 @> '{\"value\": $request->crop}' and serials->1 @> '{\"value\":$request->location}'")
             ->orderby('created_at')

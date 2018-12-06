@@ -17,7 +17,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <style>
         #m_nav .menu li.active a{
-            color:white;
+            color:#2f6358;
         }
     </style>
 </head>

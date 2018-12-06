@@ -97,7 +97,7 @@
                         <p class="project">作業項目:{{ $l->task }}</p>
                         <p class="operators">作業場域:{{ $l->operator }}</p>
                         <p class="tool">工具:{{ $l->tool }}</p>
-                        <p class="yield">收穫量:{{ $l->haversting }}</p>
+                        <p class="yield">收穫量:{{ $l->harvesting }}</p>
                         <p class="yield">茶種ID:{{ $l->tea_id }}</p>
                         <p class="yield">說明:{{ $l->explain }}</p>
                     </div>
