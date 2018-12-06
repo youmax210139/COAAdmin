@@ -94,12 +94,11 @@
                     <div class="date">{{ $l->date }}</div>
                     <div class="vfc_btn no">未驗證</div>
                     <div class="vfc_txt">
-                        <p class="project">作業項目:{{ $l->task }}</p>
+                        <p class="harvesting">作物批號:{{ $l->harvesting }}</p>
                         <p class="operators">作業場域:{{ $l->operator }}</p>
+                        <p class="project">作業項目:{{ $l->task }}</p>
                         <p class="tool">工具:{{ $l->tool }}</p>
-                        <p class="yield">收穫量:{{ $l->harvesting }}</p>
-                        <p class="yield">茶種ID:{{ $l->tea_id }}</p>
-                        <p class="yield">說明:{{ $l->explain }}</p>
+                        <p class="explain">說明:{{ $l->explain }}</p>
                     </div>
                 </div>
                 @endforeach
@@ -111,9 +110,10 @@
     <!--下版-->
     <footer id="footer">
         <div class="inner">
-            <p>國立台灣大學生物環境系統工程學研究所生物資源暨農學院</p>
-            <p>106 台北市大安區羅斯福路四段1號 台大浩瀚樓6樓603室</p>
-            <p>+886-2-3366-3488</p>
+            <p>行政院農委會 計畫補助</p>
+            <p>國立台灣大學生物環境系統工程學系 維運</p>
+            <p>106 台北市大安區羅斯福路四段1號</p>
+            <p>服務電話：+886-2-33663468</p>
         </div>
     </footer>
     <!--Web jquery-->
@@ -126,7 +126,7 @@
                 modal: true
             });
         });
-
+        
     </script>
 </body>
 
