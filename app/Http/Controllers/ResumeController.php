@@ -25,7 +25,7 @@ class ResumeController extends Controller
             ->orderby('created_at', 'desc')
             ->limit(3)
             ->get();
-        $this->validJobLogs($lists);
+        $this->validJobLogsByCheckIds($lists);
         // dd($lists);
         return view('resumes.info', compact(['lists']));
     }
@@ -67,11 +67,11 @@ class ResumeController extends Controller
             $builder->whereRaw("serials->1 @> '{\"value\": \"$request->operator\"}'");
         }
         $lists = $builder->get();
-        $this->validJobLogs($lists);
+        $this->validJobLogsByCheckIds($lists);
         return view('resumes.info', compact(['lists']));
     }
 
-    protected function validJobLogs($jobLogs)
+    protected function validJobLogsByCheckId($jobLogs)
     {
         $promises = [];
         $client = new Client([
@@ -94,11 +94,47 @@ class ResumeController extends Controller
                     $j->validation = json_decode($res->getBody(), true);
                 },
                 function (RequestException $e) use ($j) {
-                    $j->validtion = [ 'result'=> 'false', 'msg'=>$e->getMessage()];
+                    $j->validtion = [
+                        'id' => $j->id,
+                        'result' => false,
+                        'dataHash' => '',
+                        'msg' => $e->getMessage(),
+                    ];
                 }
             );
             $promises[] = $promise;
         }
         $results = Promise\settle($promises)->wait();
+    }
+
+    protected function validJobLogsByCheckIds($jobLogs)
+    {
+
+        $client = new Client([
+            // Base URI is used with relative requests
+            'base_uri' => env('VALID_API_URL'),
+        ]);
+        $res = $client->post('/check_by_ids', [
+            'form_params' => [
+                'ids' => json_encode($jobLogs->pluck('id')->toArray()),
+            ],
+        ]);
+
+        $res = json_decode($res->getBody(), true);
+
+        $jobLogs->each(function ($item, $key) use ($res) {
+            $item->validation = [
+                'id' => $item->id,
+                'result' => 'false',
+                'dataHash' => '',
+            ];
+
+            foreach ($res as $key => $val) {
+                if ($val['id'] == $item->id) {
+                    $item->validation = $val;
+                    break;
+                }
+            }
+        });
     }
 }
