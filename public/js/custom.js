@@ -25,7 +25,7 @@ function rwd_fun() {
 }
 
 $(document).ready(function(){
-    $('#m_nav a').click(function(){
+    $('#m_nav a:lt(3)').click(function(){
         $("#rwd_nav").removeClass("active");
         $("#m_nav .bars_close").hide();
         $.pageslide.close();

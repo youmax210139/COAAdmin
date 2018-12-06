@@ -1376,9 +1376,9 @@ a.bars_close {
 
 /* line 113, ../sass/module/_menu.scss */
 #m_nav {
-  width: 60%;
+  width: 100%;
   display: none;
-  position: fixed;
+  position: absolute;
   top: 90px;
   height: 100%;
   background: #ffffff;

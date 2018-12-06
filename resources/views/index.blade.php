@@ -54,14 +54,16 @@
 </head>
 
 <body id="index">
-    <div id="navbar_top"> <a id="rwd_nav" href="#m_nav">
+    <div id="navbar_top"> 
+        <a id="rwd_nav" href="#m_nav">
             <div class="ico"><span></span></div>
-        </a> </div>
+        </a> 
+    </div>
     <!--上版-->
     <header id="header">
         <div class="inner">
             <div id="header_logo">
-                <a href="index.html">
+                <a href="{{ route('homes.index') }}">
                     <img src="images/logo.svg" alt="農業產品產銷履歷區塊鏈資訊網">
                 </a>
             </div>
@@ -103,43 +105,61 @@
             <section id="about">
                 <h2 class="tit"><span>什麼是產銷履歷?</span></h2>
                 <div class="con">
-                    <h4>農產品產銷履歷制度<br>
-                        臺灣良好農業規範實施及驗證＋履歷追溯體系</h4>
-                    <p>依據「農產品生產及驗證管理法」所推動的自願性農產品產銷履歷制度，即結合上述兩大國際農產品管制制度，同時採取臺灣良好農業規範（Taiwan Good Agriculture
-                        Practice，簡稱TGAP）的實施與驗證，以及建立履歷追溯體系。簡言之，購買使用產銷履歷農產品標章（如附圖1）的產銷履歷農產品，不只可以從「產銷履歷農產品資訊網」(http://taft.coa.gov.tw)查詢到農民的生產紀錄，也代表驗證機構已經為您親赴農民的生產現場，去確認農民所記是否符合所做、所做是否符合規範，並針對產品行抽驗，而每一批產品的相關紀錄也在驗證機構的監控下，嚴格審視，一有問題就會馬上處置，因此可以有效降低履歷資料造假的風險，並且有效管控生產過程不傷害環境、產品不傷害人體。
+                    <h4>
+                        農產品產銷履歷制度<br>
+                        臺灣良好農業規範實施及驗證＋履歷追溯體系
+                    </h4>
+                    <p>
+                        依據「農產品生產及驗證管理法」所推動的自願性農產品產銷履歷制度，即結合上述兩大國際農產品管制制度，
+                        同時採取臺灣良好農業規範（Taiwan Good AgriculturePractice，簡稱TGAP）的實施與驗證，以及建立履歷追溯體系。
+                        簡言之，購買使用產銷履歷農產品標章的產銷履歷農產品，不只可以從<a href="http://taft.coa.gov.tw">「產銷履歷農產品資訊網」</a>
+                        查詢到農民的生產紀錄，也代表驗證機構已經為您親赴農民的生產現場，去確認農民所記是否符合所做、所做是否符合規範，
+                        並針對產品行抽驗，而每一批產品的相關紀錄也在驗證機構的監控下，嚴格審視，一有問題就會馬上處置，
+                        因此可以有效降低履歷資料造假的風險，並且有效管控生產過程不傷害環境、產品不傷害人體。
                     </p>
                 </div>
             </section>
             <section id="core">
                 <h2 class="tit">什麼是區塊鏈?</h2>
                 <div class="con">
-                    <p>區塊鏈建立在對等式網路（peer-to-peer，簡稱P2P）上的分散式帳本技術，參與區塊鏈的用戶可以在自己的電腦上架設一個節點，與其他節點資料同步資料，應用密碼學的加密技術，實現無法被竄改的資料庫。因為區塊鏈可以詳細記錄每一筆資料，且可以驗證每一筆資料，用於農產品的產銷履歷非常適合。</p>
+                    <p>
+                        區塊鏈建立在對等式網路（peer-to-peer，簡稱P2P）上的分散式帳本技術，
+                        參與區塊鏈的用戶可以在自己的電腦上架設一個節點，
+                        與其他節點資料同步資料，應用密碼學的加密技術，實現無法被竄改的資料庫。
+                        因為區塊鏈可以詳細記錄每一筆資料，且可以驗證每一筆資料，用於農產品的產銷履歷非常適合。
+                    </p>
                     <h4>核心價值</h4>
                     <ul>
                         <li>
                             <a href="#">
-                                <span class="img"><img src="images/core_img01.svg"></span>
+                                <span class="img"><img src="{{ asset('images/core_img01.svg') }}"></span>
                                 <span class="txt">可溯源</span>
                             </a>
                             <p>區塊鏈詳細記錄每一筆資料，可以作為農產品的溯源資料庫</p>
                         </li>
                         <li>
                             <a href="#">
-                                <span class="img"><img src="images/core_img02.svg"></span>
+                                <span class="img">
+                                    <img src="{{ asset('images/core_img02.svg') }}">
+                                </span>
                                 <span class="txt">去中心化</span>
                             </a>
                             <p>傳統的資料庫由單一的伺服器所控制，區塊鏈則由所有參與的節點共同維護</p>
                         </li>
                         <li>
-                            <a href="#"><span class="img">
-                                    <img src="images/core_img03.svg"></span>
+                            <a href="#">
+                                <span class="img">
+                                    <img src="{{ asset('images/core_img03.svg') }}">
+                                </span>
                                 <span class="txt">無法竄改</span>
                             </a>
                             <p>透過密碼學的機制，可以驗證資料的正確性</p>
                         </li>
                         <li>
-                            <a href="#"><span class="img">
-                                    <img src="images/core_img04.svg"></span>
+                            <a href="#">
+                                <span class="img">
+                                    <img src="{{ asset('images/core_img04.svg') }}">
+                                </span>
                                 <span class="txt">資料透明</span>
                             </a>
                             <p>資料都是透明的，任何人都可以取得區塊鏈上的資料</p>
@@ -178,10 +198,9 @@
                 addActive: true, // default true
                 activeClass: "active", // default active
                 offset: 150 // default 100
-            }, function () {
-            });
+            }, function () {});
         })(jQuery);
-    
+
     </script>
 </body>
 
