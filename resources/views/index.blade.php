@@ -54,10 +54,10 @@
 </head>
 
 <body id="index">
-    <div id="navbar_top"> 
+    <div id="navbar_top">
         <a id="rwd_nav" href="#m_nav">
             <div class="ico"><span></span></div>
-        </a> 
+        </a>
     </div>
     <!--上版-->
     <header id="header">
@@ -71,9 +71,9 @@
                 <div id="m_nav">
                     <div id="menu">
                         <ul class="menu">
-                            <li><a href="#about" title="什麼是產銷履歷" data-scroll="about">什麼是產銷履歷</a> </li>
-                            <li><a href="#!core" title="什麼是區塊鏈" data-scroll="core">什麼是區塊鏈</a> </li>
-                            <li><a href="#banner" title="如何加入產銷履歷" data-scroll="banner">如何加入產銷履歷</a> </li>
+                            <li><a href="#about" title="什麼是產銷履歷" data-scroll="#about">什麼是產銷履歷</a> </li>
+                            <li><a href="#core" title="什麼是區塊鏈" data-scroll="#core">什麼是區塊鏈</a> </li>
+                            <li><a href="#" title="如何加入產銷履歷" >如何加入產銷履歷</a> </li>
                             <li><a href="{{ route('resumes.inquery') }}" title="履歷查詢">履歷查詢</a> </li>
                             <li><a href="{{ route('resumes.index') }}" title="最新履歷">最新履歷</a></li>
                         </ul>
@@ -112,7 +112,7 @@
                     <p>
                         依據「農產品生產及驗證管理法」所推動的自願性農產品產銷履歷制度，即結合上述兩大國際農產品管制制度，
                         同時採取臺灣良好農業規範（Taiwan Good AgriculturePractice，簡稱TGAP）的實施與驗證，以及建立履歷追溯體系。
-                        簡言之，購買使用產銷履歷農產品標章的產銷履歷農產品，不只可以從<a href="http://taft.coa.gov.tw">「產銷履歷農產品資訊網」</a>
+                        簡言之，購買使用產銷履歷農產品標章的產銷履歷農產品，不只可以從<a href="http://taft.coa.gov.tw" target="_blank">「產銷履歷農產品資訊網」</a>
                         查詢到農民的生產紀錄，也代表驗證機構已經為您親赴農民的生產現場，去確認農民所記是否符合所做、所做是否符合規範，
                         並針對產品行抽驗，而每一批產品的相關紀錄也在驗證機構的監控下，嚴格審視，一有問題就會馬上處置，
                         因此可以有效降低履歷資料造假的風險，並且有效管控生產過程不傷害環境、產品不傷害人體。

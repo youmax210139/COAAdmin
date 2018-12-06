@@ -16,12 +16,9 @@
     <link href="{{ asset('css/animate_min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <style>
-    .no_results{
-        text-align: center;
-    }
-    #m_nav .menu li.active a{
-            color:#2f6358;
-        }    
+        .no_results{
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -41,7 +38,7 @@
                 <div id="m_nav">
                     <div id="menu">
                         <ul class="menu">
-                        <li><a href="{{ route('homes.index','#about') }}" title="什麼是產銷履歷">什麼是產銷履歷</a> </li>
+                            <li><a href="{{ route('homes.index','#about') }}" title="什麼是產銷履歷">什麼是產銷履歷</a> </li>
                             <li><a href="{{ route('homes.index','#core') }}" title="什麼是區塊鏈">什麼是區塊鏈</a> </li>
                             <li><a href="{{ route('homes.index','#banner') }}" title="如何加入產銷履歷">如何加入產銷履歷</a> </li>
                             <li><a href="{{ route('resumes.inquery') }}" title="履歷查詢">履歷查詢</a> </li>
@@ -130,7 +127,7 @@
                 modal: true
             });
         });
-        
+
     </script>
 </body>
 

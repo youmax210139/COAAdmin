@@ -1499,3 +1499,8 @@ a.bars_close {
     background: transparent;
   }
 }
+
+#m_nav .menu li.active a{
+  color:#2f6358;
+  font-weight: 600;
+}
