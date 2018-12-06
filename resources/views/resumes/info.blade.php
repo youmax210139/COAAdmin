@@ -92,7 +92,7 @@
                 <div class="vfc_box">
                     {{-- <div class="close"><span>×</span></div> --}}
                     <div class="date">{{ $l->date }}</div>
-                    <div class="vfc_btn no">未驗證</div>
+                    <div class="vfc_btn ok">已驗證</div>
                     <div class="vfc_txt">
                         <p class="harvesting">作物批號:{{ $l->harvesting }}</p>
                         <p class="operators">作業場域:{{ $l->operator }}</p>
