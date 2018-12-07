@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobLog;
+use App\Models\TeaInfo;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise;
@@ -34,17 +35,13 @@ class ResumeController extends Controller
 
     public function inquiry()
     {
-        $crops = JobLog::selectRaw("
-                DISTINCT (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '作物批號' ) as harvesting
-                ")
-            ->orderby('harvesting')
-            ->pluck('harvesting', 'harvesting');
-        $operators = JobLog::selectRaw("
-                DISTINCT (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '茶園場域' ) as operator
-                ")
-            ->orderby('operator')
-            ->pluck('operator', 'operator');
-        return view('resumes.inquiry', compact(['crops', 'operators']));
+        $farms = TeaInfo::selectRaw("DISTINCT farm")->orderby('farm')->pluck('farm', 'farm');
+        return view('resumes.inquiry', compact(['farms']));
+    }
+
+    public function harvesting(Request $request)
+    {
+        return TeaInfo::distinct("harvesting")->where('farm', $request->farm)->pluck('harvesting','harvesting');
     }
 
     public function search(Request $request)
@@ -65,11 +62,7 @@ class ResumeController extends Controller
                 (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '作物批號') = '$request->harvesting'
                 ");
         }
-        if ($request->operator) {
-            $builder->whereRaw("
-                (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '茶園場域' ) = '$request->operator'
-                ");
-        }
+
         $lists = $builder->get();
         $this->validJobLogsByCheckIds($lists);
         return redirect()->route('resumes.index')->with('lists', $lists);
@@ -113,7 +106,6 @@ class ResumeController extends Controller
 
     protected function validJobLogsByCheckIds($jobLogs)
     {
-
         $client = new Client([
             // Base URI is used with relative requests
             'base_uri' => env('VALID_API_URL'),

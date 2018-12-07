@@ -13,5 +13,6 @@
 Route::get('/', 'HomeController@index')->name('homes.index');
 Route::get('/resumes', 'ResumeController@index')->name('resumes.index');
 Route::get('/resumes/inquiry', 'ResumeController@inquiry')->name('resumes.inquiry');
+Route::get('/resumes/harvesting', 'ResumeController@harvesting')->name('resumes.harvesting');
 
 Route::post('/resumes/search', 'ResumeController@search')->name('resumes.search');

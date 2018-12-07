@@ -55,21 +55,17 @@
                     <form action="{{ route('resumes.search') }}" method="post">
                         @csrf
                         <div class="form_group">
-                            <label for="select_teaField">茶園場域</label>
-                            <select class="form-control" id="select_teaField" name="operator">
-                                <option value=''>請選擇</option>
-                                @foreach($operators as $key=>$val)
+                            <label for="select_teaField">農場</label>
+                            <select class="form-control" id="select_farmField">
+                                <option value=''>不限</option>
+                                @foreach($farms as $key=>$val)
                                 <option value="{{ $key }}">{{ str_replace('"', '', $val) }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form_group">
+                        <div class="form_group" id="harvesting_group" style="display:none;">
                             <label for="select_cropNum">作物批號</label>
-                            <select class="form-control" id="select_cropNum" name="harvesting">
-                                <option value=''>請選擇</option>
-                                @foreach($crops as $key=>$val)
-                                <option value="{{ $key }}">{{ str_replace('"', '', $val) }}</option>
-                                @endforeach
+                            <select class="form-control" id="select_harvestingField" name="harvesting">
                             </select>
                         </div>
                         <div class="form_btn">
@@ -108,6 +104,41 @@
                 $("#select_teaField").val($("#select_teaField option:first").val());
                 $("#select_cropNum").val($("#select_cropNum option:first").val());
             })
+
+            var $select_farmField = $('#select_farmField');
+            var $harvesting_group = $('#harvesting_group');
+            var $select_harvestingField = $('#select_harvestingField');
+            
+            $select_farmField.val('').change();
+            $select_farmField.change(function () {
+                var value = $(this).val();
+                $harvesting_group.hide();
+                $select_harvestingField.html("").prop('disabled', 'disabled');
+                if (value) {
+                    $select_farmField.prop('disabled', 'disabled');
+                    $.ajax({
+                        url: "{{ route('resumes.harvesting') }}",
+                        type: 'GET',
+                        data: {farm: value},
+                        success: function (response, textStatus, jqXhr) {
+                            for(var key in response) {
+                                $select_harvestingField.append("<option value="+ key + ">" + key + "</option>")
+                            }
+                            $select_harvestingField.prop('disabled', false);
+                            $harvesting_group.show();
+                            $select_farmField.prop('disabled', false);
+                            // console.log(response);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            // console.error(jqXhr.responseJSON.message);
+                        },
+                        complete: function () {
+                        }
+                    });
+                } else {
+                    
+                }
+            });
         });
 
     </script>
