@@ -988,7 +988,7 @@ section {
 @media (min-width: 1024px) {
   /* line 705, ../sass/module/_layout.scss */
   .resumeInfo #main {
-    padding: 0;
+    padding: 20px;
   }
 }
 /* line 714, ../sass/module/_layout.scss */
