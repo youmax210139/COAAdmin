@@ -76,8 +76,8 @@
                 <div id="calendar"></div>
             </section>
             <section id="verification">
-                @foreach($lists as $l)
-                <div class="vfc_box">
+                @foreach($lists as $key => $l)
+                <div class="vfc_box" data-scroll="{{ $l->scrollId }}">
                     {{-- <div class="close"><span>×</span></div> --}}
                     <div class="date">{{ $l->date }}</div>
                     @if($l->validation['result'])
@@ -113,6 +113,7 @@
     <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/jquery_pageslide_min.js') }}"></script>
     <script src="{{ asset('calendar/zabuto_calendar.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.scrollTo.min.js') }}"></script>
     <script>
         $(document).ready(function () {
             $("#rwd_nav").pageslide({
@@ -136,7 +137,7 @@
             var date = $("#" + id).data("date");
             var hasEvent = $("#" + id).data("hasEvent");
             if (hasEvent) {
-                console.log(date);
+                $('#verification').scrollTo('[data-scroll='+date+']:first', 1000, 'swing');
             }
         }
 

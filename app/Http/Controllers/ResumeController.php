@@ -35,6 +35,7 @@ class ResumeController extends Controller
         foreach ($lists as $l) {
             $date = [];
             $date['date'] = Carbon::parse($l->date)->format('Y-m-d');
+            $l->scrollId = $date['date'];
             $date['badge'] = true;
             $dates[] = $date;
         }
