@@ -14,15 +14,16 @@ class ResumeController extends Controller
     public function index(Request $request)
     {
         $latest = !session()->has('lists');
-        $lists = session('lists') ?? JobLog::selectRaw('id,
-        to_char(client_side_timestamp, \'YYYY-MM-DD HH24:MI:SS\') as date,
-        (select serials -> i ->> \'name\' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>\'type\')= \'作物批號\' ) as harvesting,
-        definition ->> \'name\' as task,
-        (select serials -> i ->> \'name\' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>\'type\')= \'茶園場域\' ) as operator,
-        (select serials -> i ->> \'name\' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>\'type\' != \'作物批號\' AND serials->i->>\'type\' != \'茶園場域\')) as tool,
-        serials->0->>\'value\' as tea_id,
-        (select serials -> i ->> \'type\' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>\'type\' != \'作物批號\' AND serials->i->>\'type\' != \'茶園場域\')) as explain
-        ')
+        $lists = session('lists') ?? JobLog::selectRaw("
+            id,
+            to_char(client_side_timestamp, 'YYYY-MM-DD HH24:MI:SS') as date,
+            (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '作物批號' ) as harvesting,
+            definition ->> 'name' as task,
+            (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '茶園場域' ) as operator,
+            (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type' != '作物批號' AND serials->i->>'type' != '茶園場域')) as tool,
+            serials->0->>'value' as tea_id,
+            (select serials -> i ->> 'type' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type' != '作物批號' AND serials->i->>'type' != '茶園場域')) as explain
+            ")
             ->orderby('created_at', 'desc')
             ->limit(3)
             ->get();
@@ -33,13 +34,13 @@ class ResumeController extends Controller
 
     public function inquiry()
     {
-        $crops = JobLog::selectRaw("DISTINCT
-                (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '作物批號' ) as harvesting
+        $crops = JobLog::selectRaw("
+                DISTINCT (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '作物批號' ) as harvesting
                 ")
             ->orderby('harvesting')
             ->pluck('harvesting', 'harvesting');
-        $operators = JobLog::selectRaw("DISTINCT
-                (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '茶園場域' ) as operator
+        $operators = JobLog::selectRaw("
+                DISTINCT (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '茶園場域' ) as operator
                 ")
             ->orderby('operator')
             ->pluck('operator', 'operator');
@@ -48,25 +49,26 @@ class ResumeController extends Controller
 
     public function search(Request $request)
     {
-        $builder = JobLog::selectRaw("id,
-                  to_char(client_side_timestamp, 'YYYY-MM-DD HH24:MI:SS') as date,
-                  (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '作物批號' ) as harvesting,
-                  definition ->> 'name' as task,
-                  (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '茶園場域' ) as operator,
-                  (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type' != '作物批號' AND serials->i->>'type' != '茶園場域')) as tool,
-                  serials->0->>'value' as tea_id,
-                  (select serials -> i ->> 'type' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type' != '作物批號' AND serials->i->>'type' != '茶園場域')) as explain
+        $builder = JobLog::selectRaw("
+                    id,
+                    to_char(client_side_timestamp, 'YYYY-MM-DD HH24:MI:SS') as date,
+                    (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '作物批號' ) as harvesting,
+                    definition ->> 'name' as task,
+                    (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '茶園場域' ) as operator,
+                    (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type' != '作物批號' AND serials->i->>'type' != '茶園場域')) as tool,
+                    serials->0->>'value' as tea_id,
+                    (select serials -> i ->> 'type' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type' != '作物批號' AND serials->i->>'type' != '茶園場域')) as explain
                   ")
             ->orderby('created_at');
         if ($request->harvesting) {
             $builder->whereRaw("
-            (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '作物批號') = '$request->harvesting'
-            ");
+                (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '作物批號') = '$request->harvesting'
+                ");
         }
         if ($request->operator) {
             $builder->whereRaw("
-            (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '茶園場域' ) = '$request->operator'
-            ");
+                (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '茶園場域' ) = '$request->operator'
+                ");
         }
         $lists = $builder->get();
         $this->validJobLogsByCheckIds($lists);
