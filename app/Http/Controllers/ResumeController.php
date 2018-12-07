@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\JobLog;
 use App\Models\TeaInfo;
 use GuzzleHttp\Client;
@@ -30,8 +31,15 @@ class ResumeController extends Controller
             ->limit(3)
             ->get();
         $this->validJobLogsByCheckIds($lists);
+        $dates = [];
+        foreach ($lists as $l) {
+            $date = [];
+            $date['date'] = Carbon::parse($l->date)->format('Y-m-d');
+            $date['badge'] = true;
+            $dates[] = $date;
+        }
         // dd($lists);
-        return view('resumes.info', compact(['lists', 'latest', 'info']));
+        return view('resumes.info', compact(['lists', 'latest', 'info', 'dates']));
     }
 
     public function inquiry()
@@ -67,7 +75,7 @@ class ResumeController extends Controller
 
         $lists = $builder->get();
         $this->validJobLogsByCheckIds($lists);
-        return redirect()->route('resumes.index')->with(['lists' => $lists, 'info' => $info??null]);
+        return redirect()->route('resumes.index')->with(['lists' => $lists, 'info' => $info ?? null]);
     }
 
     protected function validJobLogsByCheckId($jobLogs)

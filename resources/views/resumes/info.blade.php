@@ -14,6 +14,7 @@
     <!--Web css-->
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/animate_min.css') }}" rel="stylesheet">
+    <link href="{{ asset('calendar/zabuto_calendar.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <style>
         .no_results{
@@ -71,16 +72,9 @@
                 </div>
             </section>
             @endif
-            {{-- <section id="search">
-                <div class="search_box">
-                    <form action="" method="get" autocomplete="off">
-                        <input id="dateStar" name="dateStar" type="text" placeholder="請選擇開始日期" class="dateStyle">
-                        ~
-                        <input id="dateEnd" name="dateEnd" type="text" placeholder="請選擇結束日期" class="dateStyle">
-                        <button type="submit" class="ico_enter"><span class="blind">搜尋</span></button>
-                    </form>
-                </div>
-            </section> --}}
+            <section id="search">
+                <div id="calendar"></div>
+            </section>
             <section id="verification">
                 @foreach($lists as $l)
                 <div class="vfc_box">
@@ -118,12 +112,33 @@
     <script src="{{ asset('js/jquery-1.11.3.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/jquery_pageslide_min.js') }}"></script>
+    <script src="{{ asset('calendar/zabuto_calendar.min.js') }}"></script>
     <script>
         $(document).ready(function () {
             $("#rwd_nav").pageslide({
                 modal: true
             });
+            $("#calendar").zabuto_calendar({
+                language: "en",
+                data: @json($dates),
+                cell_border: true,
+                nav_icon: {
+                    prev: '<i class="fa fa-angle-left"></i>',
+                    next: '<i class="fa fa-angle-right"></i>'
+                },
+                action: function () {
+                    return onDateSelected(this.id, false);
+                },
+            });
         });
+
+        function onDateSelected(id, fromModal) {
+            var date = $("#" + id).data("date");
+            var hasEvent = $("#" + id).data("hasEvent");
+            if (hasEvent) {
+                console.log(date);
+            }
+        }
 
     </script>
 </body>
