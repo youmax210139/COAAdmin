@@ -140,7 +140,7 @@
                         <li>
                             <a href="#">
                                 <span class="img">
-                                    <img src="{{ asset('images/core_img02.svg') }}">
+                                    <img src="{{ asset('images/2.svg') }}">
                                 </span>
                                 <span class="txt">去中心化</span>
                             </a>
@@ -149,7 +149,7 @@
                         <li>
                             <a href="#">
                                 <span class="img">
-                                    <img src="{{ asset('images/core_img03.svg') }}">
+                                    <img src="{{ asset('images/3.svg') }}">
                                 </span>
                                 <span class="txt">無法竄改</span>
                             </a>
@@ -158,7 +158,7 @@
                         <li>
                             <a href="#">
                                 <span class="img">
-                                    <img src="{{ asset('images/core_img04.svg') }}">
+                                    <img src="{{ asset('images/4.svg') }}">
                                 </span>
                                 <span class="txt">資料透明</span>
                             </a>
