@@ -1126,6 +1126,7 @@ section {
 }
 /* line 833, ../sass/module/_layout.scss */
 .resumeInfo #verification {
+  margin: 50px auto 0px;
   height: 205px;
   overflow-y: scroll;
   padding: 0 15px 0 0;

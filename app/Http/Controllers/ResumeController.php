@@ -15,6 +15,7 @@ class ResumeController extends Controller
     public function index(Request $request)
     {
         $latest = !session()->has('lists');
+        $info = session('info');
         $lists = session('lists') ?? JobLog::selectRaw("
             id,
             to_char(client_side_timestamp, 'YYYY-MM-DD HH24:MI:SS') as date,
@@ -30,7 +31,7 @@ class ResumeController extends Controller
             ->get();
         $this->validJobLogsByCheckIds($lists);
         // dd($lists);
-        return view('resumes.info', compact(['lists', 'latest']));
+        return view('resumes.info', compact(['lists', 'latest', 'info']));
     }
 
     public function inquiry()
@@ -41,7 +42,7 @@ class ResumeController extends Controller
 
     public function harvesting(Request $request)
     {
-        return TeaInfo::distinct("harvesting")->where('farm', $request->farm)->pluck('harvesting','harvesting');
+        return TeaInfo::distinct("harvesting")->where('farm', $request->farm)->pluck('harvesting', 'harvesting');
     }
 
     public function search(Request $request)
@@ -61,11 +62,12 @@ class ResumeController extends Controller
             $builder->whereRaw("
                 (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '作物批號') = '$request->harvesting'
                 ");
+            $info = TeaInfo::where('harvesting', $request->harvesting)->first();
         }
 
         $lists = $builder->get();
         $this->validJobLogsByCheckIds($lists);
-        return redirect()->route('resumes.index')->with('lists', $lists);
+        return redirect()->route('resumes.index')->with(['lists' => $lists, 'info' => $info??null]);
     }
 
     protected function validJobLogsByCheckId($jobLogs)

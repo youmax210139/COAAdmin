@@ -56,22 +56,22 @@
     </div>
     <main id="main">
         <div class="inner">
-            <!--
+            @if($lists->isEmpty())
+            <p class="no_results">查詢無結果</p>
+            @else
+            @if($info)
             <section id="rsu_info">
                 <div class="info_box">
-                    <p class="pro_name"><span>產品名稱</span><em>茶葉-奇萊58冷香(奇萊58冷香)</em></p>
-                    <p class="operator"><span>農產品經營業者</span><em>順美茶廠</em></p>
-                    <p class="abbr"><span>簡稱</span><em>順美茶廠</em></p>
-                    <p class="user_name"><span>生產者姓名</span><em>許瑞麟</em></p>
-                    <p class="place"><span>產地</span><em>南投縣仁愛鄉蘆山段</em></p>
-                    <p class="date"><span>日期</span><em>2018-01-09</em></p>
-                    <p class="time"><span>時間</span><em>07:33am</em></p>
-                    <p class="materials"><span>資材(工具)</span><em>不明</em></p>
-                    <p class="quantity"><span>數量</span><em>500斤</em></p>
+                    <p class="harvesting"><span>作物批號</span><em>{{ $info->harvesting }}</em></p>
+                    <p class="farm"><span>農場</span><em>{{ $info->farm }}</em></p>
+                    <p class="city"><span>城市</span><em>{{ $info->city }}</em></p>
+                    <p class="Township"><span>城鎮</span><em>{{ $info->Township }}</em></p>
+                    <p class="address"><span>地址</span><em>{{ $info->address }}</em></p>
+                    <p class="tel"><span>電話</span><em>{{ $info->tel }}</em></p>
                 </div>
             </section>
-            -->
-            <section id="search">
+            @endif
+            {{-- <section id="search">
                 <div class="search_box">
                     <form action="" method="get" autocomplete="off">
                         <input id="dateStar" name="dateStar" type="text" placeholder="請選擇開始日期" class="dateStyle">
@@ -80,10 +80,7 @@
                         <button type="submit" class="ico_enter"><span class="blind">搜尋</span></button>
                     </form>
                 </div>
-            </section>
-            @if($lists->isEmpty())
-            <p class="no_results">查詢無結果</p>
-            @else
+            </section> --}}
             <section id="verification">
                 @foreach($lists as $l)
                 <div class="vfc_box">
