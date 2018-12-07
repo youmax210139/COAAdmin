@@ -101,13 +101,13 @@
             });
             $('.reset_btn').click(function (e) {
                 e.preventDefault();
-                $("#select_teaField").val($("#select_teaField option:first").val());
-                $("#select_cropNum").val($("#select_cropNum option:first").val());
+                $select_farmField.val('').change();
             })
 
             var $select_farmField = $('#select_farmField');
             var $harvesting_group = $('#harvesting_group');
             var $select_harvestingField = $('#select_harvestingField');
+            var $submit_btn = $('.submit_btn .btn');
             
             $select_farmField.val('').change();
             $select_farmField.change(function () {
@@ -116,6 +116,7 @@
                 $select_harvestingField.html("").prop('disabled', 'disabled');
                 if (value) {
                     $select_farmField.prop('disabled', 'disabled');
+                    $submit_btn.prop('disabled', 'disabled');
                     $.ajax({
                         url: "{{ route('resumes.harvesting') }}",
                         type: 'GET',
@@ -127,6 +128,7 @@
                             $select_harvestingField.prop('disabled', false);
                             $harvesting_group.show();
                             $select_farmField.prop('disabled', false);
+                            $submit_btn.prop('disabled', false);
                             // console.log(response);
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
