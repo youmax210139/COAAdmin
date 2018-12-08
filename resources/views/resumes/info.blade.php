@@ -115,13 +115,19 @@
     <script src="{{ asset('calendar/zabuto_calendar.min.js') }}"></script>
     <script src="{{ asset('js/jquery.scrollTo.min.js') }}"></script>
     <script>
+        var $calendar = null;
         $(document).ready(function () {
             $("#rwd_nav").pageslide({
                 modal: true
             });
-            $("#calendar").zabuto_calendar({
+            $calendar = $("#calendar").zabuto_calendar({
                 language: "en",
                 data: @json($dates),
+                today: false,
+                show_days: true,
+                year: {{ $year }},
+                month: {{ $month }},
+                weekstartson: 1,
                 cell_border: true,
                 nav_icon: {
                     prev: '<i class="fa fa-angle-left"></i>',
@@ -131,9 +137,13 @@
                     return onDateSelected(this.id, false);
                 },
             });
+            console.log("#"+$calendar.attr('id')+"_{{ $dates[0]? $dates[0]['date'] : '' }}");
+            $("#"+$calendar.attr('id')+"_{{ $dates[0]? $dates[0]['date'] : '' }}").click();
         });
 
         function onDateSelected(id, fromModal) {
+            $(".zabuto_calendar .table td.active").removeClass('active');
+            $("#" + id).addClass('active');
             var date = $("#" + id).data("date");
             var hasEvent = $("#" + id).data("hasEvent");
             if (hasEvent) {

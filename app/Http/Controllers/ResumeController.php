@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Models\JobLog;
 use App\Models\TeaInfo;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise;
@@ -39,8 +39,15 @@ class ResumeController extends Controller
             $date['badge'] = true;
             $dates[] = $date;
         }
+        if (!empty($dates)) {
+            $arr = explode("-", $dates[0]['date']);
+            $year = $arr[0];
+            $month = $arr[1];
+        } else {
+            $year = $month = null;
+        }
         // dd($lists);
-        return view('resumes.info', compact(['lists', 'latest', 'info', 'dates']));
+        return view('resumes.info', compact(['lists', 'latest', 'info', 'dates', 'year', 'month']));
     }
 
     public function inquiry()
@@ -66,7 +73,7 @@ class ResumeController extends Controller
                     serials->0->>'value' as tea_id,
                     (select serials -> i ->> 'type' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type' != '作物批號' AND serials->i->>'type' != '茶園場域')) as explain
                   ")
-            ->orderby('created_at');
+            ->orderby('created_at', 'desc');
         if ($request->harvesting) {
             $builder->whereRaw("
                 (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '作物批號') = '$request->harvesting'
