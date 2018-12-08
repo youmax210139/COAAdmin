@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\JobLog;
 use App\Models\TeaInfo;
 use Carbon\Carbon;
@@ -128,18 +129,21 @@ class ResumeController extends Controller
             // Base URI is used with relative requests
             'base_uri' => env('VALID_API_URL'),
         ]);
-        $res = $client->post('/check_by_ids', [
-            'form_params' => [
-                'ids' => json_encode($jobLogs->pluck('id')->toArray()),
-            ],
-        ]);
-
-        $res = json_decode($res->getBody(), true);
+        try {
+            $res = $client->post('/check_by_ids', [
+                'form_params' => [
+                    'ids' => json_encode($jobLogs->pluck('id')->toArray()),
+                ],
+            ]);
+            $res = json_decode($res->getBody(), true);
+        } catch (Exception $e) {
+            $res = [];
+        }
 
         $jobLogs->each(function ($item, $key) use ($res) {
             $item->validation = [
                 'id' => $item->id,
-                'result' => 'false',
+                'result' => false,
                 'dataHash' => '',
             ];
 
