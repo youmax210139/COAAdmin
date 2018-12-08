@@ -1171,10 +1171,12 @@ section {
     padding: 35px 0 25px 0;
     text-align: center;
 }
-@media (min-width: 1024px) {
+@media (min-width: 640px) {
     /* line 788, ../sass/module/_layout.scss */
     .resumeInfo #search {
-        padding: 60px 0 50px 0;
+        padding: 60px 20px 50px 20px;
+        display: inline-block;
+        width: 50%;
     }
 }
 /* line 797, ../sass/module/_layout.scss */
@@ -1224,6 +1226,9 @@ section {
     .resumeInfo #verification {
         height: 425px;
         padding: 0 20px 0 0;
+        width: 50%;
+        margin-top: 60px;
+        display: inline-block;
     }
 }
 /* line 843, ../sass/module/_layout.scss */
