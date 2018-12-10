@@ -141,7 +141,7 @@
                         <li>
                             <a href="#">
                                 <span class="img">
-                                    <img src="{{ asset('images/2.svg') }}">
+                                    <img src="{{ asset('images/network.svg') }}">
                                 </span>
                                 <span class="txt">去中心化</span>
                             </a>
