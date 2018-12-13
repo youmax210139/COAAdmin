@@ -137,8 +137,8 @@
                     return onDateSelected(this.id, false);
                 },
             });
-            console.log("#"+$calendar.attr('id')+"_{{ $dates[0]? $dates[0]['date'] : '' }}");
-            $("#"+$calendar.attr('id')+"_{{ $dates[0]? $dates[0]['date'] : '' }}").click();
+            // console.log("#"+$calendar.attr('id')+"_{{ $dates[0]? $dates[0]['date'] : '' }}");
+            $("#"+$calendar.attr('id')+"_{{ $dates[0]['date'] }}").click();
         });
 
         function onDateSelected(id, fromModal) {

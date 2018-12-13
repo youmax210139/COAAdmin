@@ -46,6 +46,7 @@ class ResumeController extends Controller
             $month = $arr[1];
         } else {
             $year = $month = null;
+            $dates[] = ['date'=>null];
         }
         // dd($lists);
         return view('resumes.info', compact(['lists', 'latest', 'info', 'dates', 'year', 'month']));
