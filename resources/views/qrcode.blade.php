@@ -57,7 +57,7 @@
                     <h1><span>QRCODE</span></h1>
                 </div>
                 <div class="con">
-                    {!! QrCode::size(400)->generate(url('/resumes/search?harvest='.urlencode('107冬茶-青心烏龍'))); !!}
+                    {!! QrCode::size(400)->generate(url('/resumes/search?harvesting='.urlencode('107冬茶-青心烏龍'))); !!}
                 </div>
             </section>
         </div>
