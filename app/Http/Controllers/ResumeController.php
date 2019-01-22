@@ -20,6 +20,7 @@ class ResumeController extends Controller
         $info = session('info');
         $lists = session('lists') ?? JobLog::selectRaw("
             id,
+            url,
             to_char(client_side_timestamp, 'YYYY-MM-DD HH24:MI:SS') as date,
             (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '作物批號' ) as harvesting,
             definition ->> 'name' as task,
@@ -67,6 +68,7 @@ class ResumeController extends Controller
     {
         $builder = JobLog::selectRaw("
                     id,
+                    url,
                     to_char(client_side_timestamp, 'YYYY-MM-DD HH24:MI:SS') as date,
                     (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '作物批號' ) as harvesting,
                     definition ->> 'name' as task,

@@ -20,6 +20,15 @@
         .no_results{
             text-align: center;
         }
+        .info_box .more a,
+        .vfc_txt .more a{
+            color: #2F6156;
+            font-weight: 600;
+        }
+        .info_box .more a:visited,
+        .vfc_txt .more a:visited{
+            color: #990088;
+        }
     </style>
 </head>
 
@@ -69,6 +78,7 @@
                     <p class="Township"><span>城鎮</span><em>{{ $info->Township }}</em></p>
                     <p class="address"><span>地址</span><em>{{ $info->address }}</em></p>
                     <p class="tel"><span>電話</span><em>{{ $info->tel }}</em></p>
+                    <p class="more"><span></span><em><a href="{{$info->url}}" target="_blank">更多資訊</a></em></p>
                 </div>
             </section>
             @endif
@@ -91,6 +101,7 @@
                         <p class="project">作業項目:{{ $l->task }}</p>
                         <p class="tool">工具:{{ $l->tool }}</p>
                         <p class="explain">說明:{{ $l->explain }}</p>
+                        <p class="more"><a href="{{$l->url}}" target="_blank">更多資訊</a></p>
                     </div>
                 </div>
                 @endforeach
