@@ -13,7 +13,7 @@
 ```shell
 composer install --no-dev # --no-dev 僅正式境境需加入參數
 sudo chgrp -R www-data storage bootstrap/cache # 修改storage權限
-sudo chmod -R ug+rwx storage bootstrap/cach  # 修改storage權限
+sudo chmod -R ug+rwx storage bootstrap/cache  # 修改storage權限
 cp .env.example .env     # 修改.env設定
 php artisan key:generate # 產生key
 ```
@@ -46,5 +46,5 @@ sudo service apache2 restart
 ## .ENV 設定
 
 ```shell
-VALID_API_URL = 140.112.76.153:3333 # 驗証作物調用的API地址
+VALID_API_URL = 127.0.0.1:3333 # 驗証作物調用的API地址
 ```

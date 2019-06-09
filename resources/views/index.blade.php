@@ -91,9 +91,9 @@
                         <p>沒有農藥殘留</p>
                     </div>
                     <div class="search_box">
-                        <form action="{{ route('resumes.search') }}" method="post" autocomplete="off">
-                            @csrf
-                            <input name="harvesting" type="text" class="srch_input" placeholder="請輸入作物批號">
+                        <form action="{{ route('resumes.index') }}" method="get" autocomplete="off">
+                            <input name="farm" type="text" class="srch_input" placeholder="請輸入農場">
+                            <input name="product" type="text" class="srch_input" placeholder="請輸入作物批號">
                             <button type="submit" class="ico_enter"><span class="blind">搜尋</span></button>
                         </form>
                     </div>

@@ -12,8 +12,10 @@
  */
 Route::get('/', 'HomeController@index')->name('homes.index');
 Route::get('/resumes', 'ResumeController@index')->name('resumes.index');
+#履歷查詢頁面
 Route::get('/resumes/inquiry', 'ResumeController@inquiry')->name('resumes.inquiry');
-Route::get('/resumes/harvesting', 'ResumeController@harvesting')->name('resumes.harvesting');
+#取得 product_name
+Route::get('/resumes/product', 'ResumeController@product')->name('resumes.product');
 
 Route::post('/resumes/search', 'ResumeController@search')->name('resumes.search');
 Route::get('/resumes/search', 'ResumeController@search')->name('resumes.search');
