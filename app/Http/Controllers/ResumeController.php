@@ -19,6 +19,7 @@ class ResumeController extends Controller
         }
         if ($request->product) {
             $products = $products->where('product_name', $request->product);
+            $products = $products->where('website-enable', 1);
         }
 
         $products = $products->get();
@@ -56,33 +57,13 @@ class ResumeController extends Controller
 
     public function product(Request $request)
     {
-        return Product::distinct("product_name")->where('farm', $request->farm)->pluck('product_name', 'product_name');
-    }
-
-    public function search(Request $request)
-    {
-        $builder = JobLog::selectRaw("
-                    id,
-                    url,
-                    to_char(client_side_timestamp, 'YYYY-MM-DD HH24:MI:SS') as date,
-                    (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '作物批號' ) as harvesting,
-                    definition ->> 'name' as task,
-                    (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '茶園場域' ) as operator,
-                    (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type' != '作物批號' AND serials->i->>'type' != '茶園場域')) as tool,
-                    serials->0->>'value' as tea_id,
-                    (select serials -> i ->> 'type' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type' != '作物批號' AND serials->i->>'type' != '茶園場域')) as explain
-                  ")
-            ->orderby('created_at', 'desc');
-        if ($request->harvesting) {
-            $builder->whereRaw("
-                (select serials -> i ->> 'name' from generate_series(0,jsonb_array_length(serials)-1) as gs (i) where (serials->i->>'type')= '作物批號') = '$request->harvesting'
-                ");
-            $info = TeaInfo::where('harvesting', $request->harvesting)->first();
-        }
-
-        $lists = $builder->get();
-        $this->validJobLogsByCheckIds($lists);
-        return redirect()->route('resumes.index')->with(['lists' => $lists, 'info' => $info ?? null]);
+        $request->validate([
+            'farm' => 'required'
+        ]);
+        return Product::distinct("product_name")->where([
+            ['farm','=', $request->farm],
+            ['website-enable','=', 1],
+        ])->pluck('product_name', 'product_name');
     }
 
     protected function validJobLogsByCheckIds($jobLogs)

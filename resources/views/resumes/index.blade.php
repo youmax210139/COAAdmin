@@ -107,7 +107,7 @@
                     <div class="vfc_txt">
                         <p class="project">作業項目:{{ $l->task??'--' }}</p>
                         <p class="operators">作業場域:{{ $l->location??'--' }}</p>
-                        <p class="tool">工具:{{ $l->tool??'--' }}</p>
+                        <p class="tool">工具:{{ $l->tool_type??'--' }}</p>
                         <p class="explain">備註:{{ $l->remark??'--' }}</p>
                         <p class="more"><a href="{{$l->more_info_url??'/'}}" target="_blank">更多資訊</a></p>
                     </div>

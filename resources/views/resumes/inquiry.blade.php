@@ -62,6 +62,10 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div id="errMsg" style="color:red;display:none">
+                            <h3>錯誤:</h3>
+                            <p></p>
+                        </div>
                         <div class="form_group" id="product_group" style="display:none;">
                             <label for="select_cropNum">作物批號</label>
                             <select class="form-control" id="select_productField" name="product">
@@ -100,6 +104,7 @@
             });
             $('.reset_btn').click(function (e) {
                 e.preventDefault();
+                $errMsg.hide();
                 $select_farmField.val(null).change();
             })
 
@@ -107,46 +112,57 @@
             var $product_group = $('#product_group');
             var $select_productField = $('#select_productField');
             var $submit_btn = $('.submit_btn .btn');
-            
+            var $errMsg = $('#errMsg');
+            var $search_form = $('#search_form');
+
+            $submit_btn.click(function(e){
+                $errMsg.hide();
+                $submit_btn.prop('disabled', 'disabled');
+                $search_form.submit();
+            });
+
             $select_farmField.val('').change();
+
             $select_farmField.change(function () {
+                $errMsg.hide();
                 var value = $(this).val();
                 $product_group.hide();
                 $select_productField.html("").prop('disabled', 'disabled');
                 if (value) {
                     $select_farmField.prop('disabled', 'disabled');
                     $submit_btn.prop('disabled', 'disabled');
+                    var $ajaxError = function(r, textStatus, err){
+                        console.log(r);
+                        var e = JSON.parse(r.responseText);
+                        // console.log(e);
+                        $errMsg.show().find('p').text(JSON.stringify(e.errors));
+                    };
+
                     $.ajax({
                         url: "{{ route('resumes.product') }}",
                         type: 'GET',
                         data: {farm: value},
                         success: function (response, textStatus, jqXhr) {
+                            if(response.length == 0){
+                                return $ajaxError({"responseText":"{\"errors\":\"{{__('custom.empty_product')}}\"}"}, textStatus, null);
+                            }
                             for(var key in response) {
                                 $select_productField.append("<option value="+ key + ">" + key + "</option>")
                             }
                             $select_productField.prop('disabled', false);
                             $product_group.show();
-                            $select_farmField.prop('disabled', false);
-                            $submit_btn.prop('disabled', false);
                             // console.log(response);
                         },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            // console.error(jqXhr.responseJSON.message);
-                        },
+                        error: $ajaxError,
                         complete: function () {
+                            $select_farmField.prop('disabled', false);
+                            $submit_btn.prop('disabled', false);
                         }
                     });
                 } else {
                     
                 }
             });
-
-            // $("#search_form").submit(function(e){
-            //     e.preventDefault();
-            //     var data = $( this ).serialize().replace(/&?[^=&]+=(&|$)/g,'');
-            //     var base_url = "{{ route('resumes.index') }}";
-            //     window.location.href = (data.length >0) ? base_url + "?"+ data: base_url;
-            // });
         });
 
     </script>
