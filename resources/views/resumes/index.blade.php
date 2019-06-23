@@ -88,6 +88,7 @@
                         <p class="address"><span>地址</span><em>{{ $product->address??'--' }}</em></p>
                         <p class="tel"><span>電話</span><em>{{ $product->tel??'--' }}</em></p>
                         <p class="more"><span></span><em><a href="{{$product->more_info_url??'/'}}" target="_blank">更多資訊</a></em></p>
+                        <p class="more"><span></span><em><a href="{{$product->bc_address??'/'}}" target="_blank">區塊鏈智能合約</a></em></p>
                     </div>
                 </section>
                 @endif
@@ -110,7 +111,6 @@
                         <p class="tool">{{$l->tool_type??'--'}}:{{ $l->tool??'--' }}</p>
                         <p class="explain">備註:{{ $l->remark??'--' }}</p>
                         <p class="more"><a href="{{$l->product->more_info_url??'/'}}" target="_blank">更多資訊</a></p>
-                        <p class="more"><a href="{{$l->product->bc_address??'/'}}" target="_blank">區塊鏈智能合約</a></p>
                     </div>
                 </div>
                 @endforeach
