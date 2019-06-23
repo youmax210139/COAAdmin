@@ -109,7 +109,8 @@
                         <p class="operators">作業場域:{{ $l->location??'--' }}</p>
                         <p class="tool">工具:{{ $l->tool_type??'--' }}</p>
                         <p class="explain">備註:{{ $l->remark??'--' }}</p>
-                        <p class="more"><a href="{{$l->more_info_url??'/'}}" target="_blank">更多資訊</a></p>
+                        <p class="more"><a href="{{$l->product->more_info_url??'/'}}" target="_blank">更多資訊</a></p>
+                        <p class="more"><a href="{{$l->product->bc_address??'/'}}" target="_blank">區塊鏈智能合約</a></p>
                     </div>
                 </div>
                 @endforeach
