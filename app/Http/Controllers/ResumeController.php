@@ -34,7 +34,7 @@ class ResumeController extends Controller
         foreach ($logs as $l) {
             $date = [];
             $date['date'] = Carbon::createFromTimestamp($l->timestamp)->format('Y-m-d');
-            $l->date = $l->scrollId = $date['date'];
+            $l->scrollId = $date['date'];
             $date['badge'] = true;
             $dates[] = $date;
         }
