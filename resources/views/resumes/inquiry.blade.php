@@ -132,9 +132,7 @@
                     $select_farmField.prop('disabled', 'disabled');
                     $submit_btn.prop('disabled', 'disabled');
                     var $ajaxError = function(r, textStatus, err){
-                        console.log(r);
                         var e = JSON.parse(r.responseText);
-                        // console.log(e);
                         $errMsg.show().find('p').text(JSON.stringify(e.errors));
                     };
 

@@ -18,6 +18,8 @@ Route::get('/resumes', 'ResumeController@index')->name('resumes.index');
 Route::get('/resumes/inquiry', 'ResumeController@inquiry')->name('resumes.inquiry');
 #取得 product_name
 Route::get('/resumes/product', 'ResumeController@product')->name('resumes.product');
+#取得驗証資料
+Route::get('/resumes/validation', 'ResumeController@validation')->name('resumes.validation');
 #二維碼
 Route::get('/qrcode', function () {
     return view('qrcode');

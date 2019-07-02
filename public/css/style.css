@@ -1279,6 +1279,9 @@ section {
     letter-spacing: 5px;
     padding: 3px 15px;
     margin: 0 0 0 15px;
+    background: #22b573;
+    min-width: 87px;
+    vertical-align: bottom;
 }
 /* line 887, ../sass/module/_layout.scss */
 .resumeInfo #verification .vfc_box .vfc_btn.no {
@@ -1647,3 +1650,41 @@ div.zabuto_calendar .table tr td.active div.day span.badge
    background: #fbb03b;
    color: white;
 }
+.resumeInfo #verification .vfc_btn_wrapper{
+    vertical-align: middle;
+} 
+
+.lds-ring {
+    width: 1.5em;
+    height: 1.5em;
+    margin: auto;
+  }
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    margin: 2px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent;
+  }
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

@@ -81,7 +81,7 @@
             @if($logs->isEmpty())
             <p class="no_results">查詢無結果</p>
             @else
-                @if(count($products) == 1 && $product= $products[0])
+                @if(!empty($request->query()) && count($products) == 1 && $product= $products[0])
                 <section id="rsu_info">
                     <div class="info_box">
                         <p class="harvesting"><span>作物批號</span><em>{{ $product->product_name??'--' }}</em></p>
@@ -104,13 +104,13 @@
             <section id="verification">
                 @foreach($logs as $key => $l)
                 <div class="vfc_box" data-scroll="{{ $l->scrollId }}">
-                    {{-- <div class="close"><span>×</span></div> --}}
                     <div class="date">{{ $l->date }}</div>
-                    @if($l->validation['result'])
-                    <div class="vfc_btn ok"><a href="{{$l->bc_explore_url??'/'}}" target="_blank">已驗證</a></div>
-                    @else
-                    <div class="vfc_btn no"><a href="{{$l->bc_explore_url??'/'}}" target="_blank">未驗證</a></div>
-                    @endif
+                    <a href="{{$l->bc_explore_url??'/'}}" target="_blank" class="vfc_btn_wrapper">
+                        <div class="vfc_btn" id="v_{{ $l->log_id }}">
+                            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                            <div class="text" style="display:none"></div>
+                        </div>
+                    </a>
                     <div class="vfc_txt">
                         <p class="project">作業項目:{{ $l->task??'--' }}</p>
                         <p class="operators">作業場域:{{ $l->location??'--' }}</p>
@@ -163,8 +163,30 @@
                     return onDateSelected(this.id, false);
                 },
             });
-            // console.log("#"+$calendar.attr('id')+"_{{ $dates[0]? $dates[0]['date'] : '' }}");
             $("#"+$calendar.attr('id')+"_{{ $dates[0]['date'] }}").click();
+            $.ajax({
+                url: "{{ route('resumes.validation') }}",
+                type: 'GET',
+                data: { 'products[]':{!! $products->pluck('product_id') !!} },
+                success: function (response, textStatus, jqXhr) {
+                    $( ".vfc_btn" ).each(function( index ) {
+                        $(this).find(".lds-ring").hide();
+                        if(response[$(this).attr('id').substr(2)]){
+                            $(this).removeClass("ok no").addClass("ok");
+                            $(this).find(".text").text("已驗証").show();
+                        }
+                        else{
+                            $(this).removeClass("ok no").addClass("no");
+                            $(this).find(".text").text("未驗証").show();
+                        }
+                    });
+                },
+                error: function(r, textStatus, err){
+                    console.error(r.responseJSON.message);
+                },
+                complete: function () {
+                }
+            });
         });
 
         function onDateSelected(id, fromModal) {

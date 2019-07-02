@@ -5,12 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\TaskLog;
 use Carbon\Carbon;
-use Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Promise;
 use Illuminate\Http\Request;
 
 class ResumeController extends Controller
 {
+    /**
+     * 最新履歷及查詢結果頁面
+     *
+     * @param Request $request
+     * @return void
+     */
     public function index(Request $request)
     {
         $products = Product::query();
@@ -19,9 +25,8 @@ class ResumeController extends Controller
         }
         if ($request->product) {
             $products = $products->where('product_name', $request->product);
-            $products = $products->where('website-enable', 1);
         }
-
+        $products = $products->where('website-enable', 1);
         $products = $products->get();
 
         $logs = TaskLog::with('product')->whereIn('product_id', $products->pluck('product_id'))->orderby('timestamp', 'desc');
@@ -29,7 +34,10 @@ class ResumeController extends Controller
             $logs = $logs->limit(3);
         }
         $logs = $logs->get();
-        // $this->validJobLogsByCheckIds($lists);
+        $products = $logs->pluck('product')->unique(function ($item) {
+            return $item['product_id'];
+        });
+
         $dates = [];
         foreach ($logs as $l) {
             $date = [];
@@ -49,53 +57,67 @@ class ResumeController extends Controller
         return view('resumes.index', compact(['logs', 'latest', 'dates', 'year', 'month', 'products']));
     }
 
+    /**
+     * 查詢履歷頁面
+     *
+     * @return void
+     */
     public function inquiry()
     {
         $farms = Product::distinct('farm')->orderby('farm')->pluck('farm', 'farm');
         return view('resumes.inquiry', compact(['farms']));
     }
 
+    /**
+     * 取得 product_name
+     *
+     * @param Request $request
+     * @return void
+     */
     public function product(Request $request)
     {
         $request->validate([
-            'farm' => 'required'
+            'farm' => 'required',
         ]);
         return Product::distinct("product_name")->where([
-            ['farm','=', $request->farm],
-            ['website-enable','=', 1],
+            ['farm', '=', $request->farm],
+            ['website-enable', '=', 1],
         ])->pluck('product_name', 'product_name');
     }
 
-    protected function validJobLogsByCheckIds($jobLogs)
+    /**
+     * 取得驗証資料
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function validation(Request $request)
     {
+        $request->validate([
+            'products' => 'required',
+        ]);
+        $promises = [];
         $client = new Client([
-            // Base URI is used with relative requests
             'base_uri' => env('VALID_API_URL'),
         ]);
-        try {
-            $res = $client->post('/check_by_ids', [
+        foreach ($request->products as $id) {
+            $promise = $client->postAsync('/check_by_product_id', [
                 'form_params' => [
-                    'ids' => json_encode($jobLogs->pluck('id')->toArray()),
+                    'product_id' => $id,
                 ],
             ]);
-            $res = json_decode($res->getBody(), true);
-        } catch (Exception $e) {
-            $res = [];
+            $promises[] = $promise;
         }
-
-        $jobLogs->each(function ($item, $key) use ($res) {
-            $item->validation = [
-                'id' => $item->id,
-                'result' => false,
-                'dataHash' => '',
-            ];
-
-            foreach ($res as $key => $val) {
-                if ($val['id'] == $item->id) {
-                    $item->validation = $val;
-                    break;
-                }
+        $results = Promise\unwrap($promises);
+        $response = [];
+        foreach ($results as $res) {
+            if ($res->getStatusCode() != 200) {
+                continue;
             }
-        });
+            foreach (json_decode($res->getBody(), true) as $v) {
+                $response[$v['log_id']] = $v['result'];
+            }
+        }
+        return $response;
     }
 }
