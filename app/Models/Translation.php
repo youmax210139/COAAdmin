@@ -8,5 +8,5 @@ class Translation extends Model
 {
     protected $table = 'translations';
 
-    protected $fillable = ['table_name', 'column_name', 'foreign_key', 'locale', 'value'];
+    protected $fillable = ['table_name', 'column_name', 'foreign_key', 'locale', 'value', 'default'];
 }

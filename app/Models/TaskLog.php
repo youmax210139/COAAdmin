@@ -12,6 +12,7 @@ class TaskLog extends Model
 
     protected $table = 'task_log';
     protected $primaryKey = 'log_id';
+    protected $translatable = ['task', 'location', 'tool', 'tool_type'];
 
     public function product()
     {

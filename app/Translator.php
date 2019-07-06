@@ -38,7 +38,6 @@ class Translator implements ArrayAccess, JsonSerializable
     public function translate($locale = null, $fallback = true)
     {
         $this->locale = $locale;
-
         foreach ($this->model->getTranslatableAttributes() as $attribute) {
             $this->translateAttribute($attribute, $locale, $fallback);
         }

@@ -11,7 +11,7 @@ class Product extends Model
 
     protected $table = 'product';
     protected $primaryKey = 'product_id';
-    protected $translatable = ['product_name'];
+    protected $translatable = ['product_name', 'farm'];
 
     public function taskLogs()
     {

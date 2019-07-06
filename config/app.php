@@ -82,8 +82,8 @@ return [
 
     'locale' => 'zhtw',
     'locales' => [
-        'en',
         'zhtw',
+        'en',
     ],
 
     /*
