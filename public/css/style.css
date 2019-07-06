@@ -524,15 +524,22 @@ section {
     font-family: "微軟正黑體";
     font-size: 17px;
     padding: 10px 0;
-    display:block;
-    width: 80%;
-    margin:auto;
-    margin-bottom: 10px;
 }
 @media (min-width: 640px) {
     /* line 241, ../sass/module/_layout.scss */
     #index #banner .search_box .srch_input {
         width: 250px;
+    }
+}
+@media (max-width: 640px){
+    #index #banner .search_box .srch_input {
+        display:block;
+        width: 80%;
+        margin:auto;
+        margin-bottom: 10px;
+    }
+    #index #banner .search_box{
+        text-align: center;
     }
 }
 /* line 256, ../sass/module/_layout.scss */
