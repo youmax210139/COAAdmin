@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
+use App\Traits\Translatable;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $table = 'product';
+    use Translatable;
 
+    protected $table = 'product';
     protected $primaryKey = 'product_id';
+    protected $translatable = ['product_name'];
 
     public function taskLogs()
     {

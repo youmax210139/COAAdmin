@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use App\Traits\Translatable;
 use Illuminate\Database\Eloquent\Model;
 
 class TaskLog extends Model
 {
-    protected $table = 'task_log';
+    use Translatable;
 
+    protected $table = 'task_log';
     protected $primaryKey = 'log_id';
 
     public function product()
