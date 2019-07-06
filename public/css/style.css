@@ -524,7 +524,10 @@ section {
     font-family: "微軟正黑體";
     font-size: 17px;
     padding: 10px 0;
-    width: auto;
+    display:block;
+    width: 80%;
+    margin:auto;
+    margin-bottom: 10px;
 }
 @media (min-width: 640px) {
     /* line 241, ../sass/module/_layout.scss */
