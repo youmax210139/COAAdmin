@@ -10,17 +10,21 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
-#首頁
-Route::get('/', 'HomeController@index')->name('homes.index');
-#最新履歷及查詢結果頁面
-Route::get('/resumes', 'ResumeController@index')->name('resumes.index');
-#履歷查詢表單頁面
-Route::get('/resumes/inquiry', 'ResumeController@inquiry')->name('resumes.inquiry');
-#取得 product_name
-Route::get('/resumes/product', 'ResumeController@product')->name('resumes.product');
-#取得驗証資料
-Route::get('/resumes/validation', 'ResumeController@validation')->name('resumes.validation');
-#二維碼
-Route::get('/qrcode', function () {
-    return view('qrcode');
-})->name('qrcode.show');
+Route::group([
+    'middleware' => 'setlocale',
+], function () {
+    #首頁
+    Route::get('/', 'HomeController@index')->name('homes.index');
+    #最新履歷及查詢結果頁面
+    Route::get('/resumes', 'ResumeController@index')->name('resumes.index');
+    #履歷查詢表單頁面
+    Route::get('/resumes/inquiry', 'ResumeController@inquiry')->name('resumes.inquiry');
+    #取得 product_name
+    Route::get('/resumes/product', 'ResumeController@product')->name('resumes.product');
+    #取得驗証資料
+    Route::get('/resumes/validation', 'ResumeController@validation')->name('resumes.validation');
+    #二維碼
+    Route::get('/qrcode', function () {
+        return view('qrcode');
+    })->name('qrcode.show');
+});

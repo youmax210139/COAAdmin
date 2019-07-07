@@ -21,10 +21,10 @@ class ResumeController extends Controller
     {
         $products = Product::query();
         if ($request->farm) {
-            $products = $products->where('farm', $request->farm);
+            $products = $products->whereTranslation('farm', urldecode($request->farm));
         }
         if ($request->product) {
-            $products = $products->where('product_name', $request->product);
+            $products = $products->whereTranslation('product_name', urldecode($request->product));
         }
         $products = $products->where('website-enable', 1);
         $products = $products->get();
@@ -37,6 +37,7 @@ class ResumeController extends Controller
         $products = $logs->pluck('product')->unique(function ($item) {
             return $item['product_id'];
         });
+        $products = $products->translate('en');
 
         $dates = [];
         foreach ($logs as $l) {
@@ -54,6 +55,7 @@ class ResumeController extends Controller
             $year = $month = null;
             $dates[] = ['date' => null];
         }
+        $logs = $logs->translate('en');
         return view('resumes.index', compact(['logs', 'latest', 'dates', 'year', 'month', 'products']));
     }
 
@@ -64,7 +66,11 @@ class ResumeController extends Controller
      */
     public function inquiry()
     {
-        $farms = Product::distinct('farm')->orderby('farm')->pluck('farm', 'farm');
+        $farms = Product::distinct('farm')
+            ->orderby('farm')
+            ->get()
+            ->translate('en')
+            ->pluck('farm', 'farm');
         return view('resumes.inquiry', compact(['farms']));
     }
 
@@ -79,12 +85,13 @@ class ResumeController extends Controller
         $request->validate([
             'farm' => 'required',
         ]);
-        return Product::distinct("product_name")->where([
-            ['farm', '=', $request->farm],
-            ['website-enable', '=', 1],
-        ])->pluck('product_name', 'product_name');
+        return Product::distinct("product_name")
+            ->whereTranslation('farm', urldecode($request->farm))
+            ->where('website-enable', 1)
+            ->get()
+            ->translate('en')
+            ->pluck('product_name', 'product_name');
     }
-
     /**
      * 取得驗証資料
      *

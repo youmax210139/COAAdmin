@@ -58,7 +58,7 @@
                             <select class="form-control" id="select_farmField" name="farm">
                                 <option value=''>不限</option>
                                 @foreach($farms as $key=>$val)
-                                <option value="{{ $key }}">{{ str_replace('"', '', $val) }}</option>
+                                <option value="{{ urlencode($key) }}">{{ str_replace('"', '', $val) }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -145,7 +145,7 @@
                                 return $ajaxError({"responseText":"{\"errors\":\"{{__('custom.empty_product')}}\"}"}, textStatus, null);
                             }
                             for(var key in response) {
-                                $select_productField.append("<option value="+ key + ">" + key + "</option>")
+                                $select_productField.append("<option value="+ encodeURI(key) + ">" + key + "</option>")
                             }
                             $select_productField.prop('disabled', false);
                             $product_group.show();

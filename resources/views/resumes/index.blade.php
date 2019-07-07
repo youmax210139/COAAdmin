@@ -146,6 +146,7 @@
             $("#rwd_nav").pageslide({
                 modal: true
             });
+            @if(!$logs->isEmpty())
             $calendar = $("#calendar").zabuto_calendar({
                 language: "en",
                 data: @json($dates),
@@ -187,6 +188,7 @@
                 complete: function () {
                 }
             });
+            @endif
         });
 
         function onDateSelected(id, fromModal) {
