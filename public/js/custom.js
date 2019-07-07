@@ -17,7 +17,7 @@ $(document).ready(function() {
 function rwd_fun() {
     var width = window.innerWidth;
     var height = window.innerHeight;
-    if (width > 1024) {
+    if (width >= 1024) {
         $('#header_nav').before($('#header_logo'));
     } else {
         $('#rwd_nav').before($('#header_logo'));
@@ -29,5 +29,15 @@ $(document).ready(function(){
         $("#rwd_nav").removeClass("active");
         $("#m_nav .bars_close").hide();
         $.pageslide.close();
+    });
+    $("#togBtn").change(function(){
+        if(this.checked){
+            //console.log('en');
+            location.href="/locales/en";
+        }
+        else{
+            //console.log('zhtw');
+            location.href="/locales/zhtw";
+        }
     });
 })

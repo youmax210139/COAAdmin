@@ -37,8 +37,7 @@ class ResumeController extends Controller
         $products = $logs->pluck('product')->unique(function ($item) {
             return $item['product_id'];
         });
-        $products = $products->translate('en');
-
+        $products = $products->translate(app()->getLocale());
         $dates = [];
         foreach ($logs as $l) {
             $date = [];
@@ -55,7 +54,7 @@ class ResumeController extends Controller
             $year = $month = null;
             $dates[] = ['date' => null];
         }
-        $logs = $logs->translate('en');
+        $logs = $logs->translate(app()->getLocale());
         return view('resumes.index', compact(['logs', 'latest', 'dates', 'year', 'month', 'products']));
     }
 
@@ -69,7 +68,7 @@ class ResumeController extends Controller
         $farms = Product::distinct('farm')
             ->orderby('farm')
             ->get()
-            ->translate('en')
+            ->translate(app()->getLocale())
             ->pluck('farm', 'farm');
         return view('resumes.inquiry', compact(['farms']));
     }
@@ -89,7 +88,7 @@ class ResumeController extends Controller
             ->whereTranslation('farm', urldecode($request->farm))
             ->where('website-enable', 1)
             ->get()
-            ->translate('en')
+            ->translate(app()->getLocale())
             ->pluck('product_name', 'product_name');
     }
     /**

@@ -180,7 +180,7 @@ trait Translatable
             $fallback = config('app.fallback_locale', 'zhtw');
         }
 
-        $default = config('app.locale');
+        $default = 'zhtw';
 
         $translations = $this->getRelation('translations')
             ->where('column_name', $attribute);

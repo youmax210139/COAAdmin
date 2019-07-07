@@ -3,8 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Cookie;
-use Carbon\Carbon;
+use App;
 
 class SetLocale
 {
@@ -17,9 +16,7 @@ class SetLocale
      */
     public function handle($request, Closure $next)
     {
-        $locale = Cookie::get('locale', config('app.locale'));
-        Carbon::setLocale($locale);
-        app()->setLocale($locale);
+        App::setLocale(session('locale', config('app.locale')));
         return $next($request);
     }
 }

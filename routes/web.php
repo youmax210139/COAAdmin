@@ -27,4 +27,6 @@ Route::group([
     Route::get('/qrcode', function () {
         return view('qrcode');
     })->name('qrcode.show');
+    #语言
+    Route::get('/locales/{locale}', 'LocaleController@update')->name('locales.update');
 });

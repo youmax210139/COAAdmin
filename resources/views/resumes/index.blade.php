@@ -66,6 +66,10 @@
                                 <a href="{{ route('resumes.index') }}" title="最新履歷">最新履歷</a>
                             </li>
                         </ul>
+                        <label class="switch">
+                            <input type="checkbox" id="togBtn" {{ session('locale')=='en'?'checked':'' }}>
+                            <div class="slider round"></div>
+                        </label>
                     </div>
                     <a href="javascript:$.pageslide.close()" class="bars_close"></a>
                 </div>
