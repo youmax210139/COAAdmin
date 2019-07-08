@@ -33,8 +33,16 @@
                 <div id="m_nav">
                     <div id="menu">
                         <ul class="menu">
-                            <li><a href="{{ route('homes.index','#about') }}" title="什麼是產銷履歷">什麼是產銷履歷</a> </li>
-                            <li><a href="{{ route('homes.index','#core') }}" title="什麼是區塊鏈">什麼是區塊鏈</a> </li>
+                            <li>
+                                <a href="#about" title="{{ trans('custom.traceabilty_about') }}" data-scroll="#about">
+                                    {{ trans('custom.traceabilty_about') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#core" title="{{ trans('custom.blockchain_about') }}" data-scroll="#core">
+                                    {{ trans('custom.blockchain_about') }}
+                                </a>
+                            </li>
                             <li><a href="{{ route('homes.index','#banner') }}" title="如何加入產銷履歷">如何加入產銷履歷</a> </li>
                             <li class="active"><a href="{{ route('resumes.inquiry') }}" title="履歷查詢">履歷查詢</a> </li>
                             <li><a href="{{ route('resumes.index') }}" title="最新履歷">最新履歷</a></li>
