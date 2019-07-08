@@ -59,12 +59,12 @@
                     <div id="menu">
                         <ul class="menu">
                             <li>
-                                <a href="#about" title="{{ trans('custom.traceabilty_about') }}" data-scroll="#about">
+                                <a href="{{ route('homes.index','#about') }}" title="{{ trans('custom.traceabilty_about') }}" data-scroll="#about">
                                     {{ trans('custom.traceabilty_about') }}
                                 </a>
                             </li>
                             <li>
-                                <a href="#core" title="{{ trans('custom.blockchain_about') }}" data-scroll="#core">
+                                <a href="{{ route('homes.index','#core') }}" title="{{ trans('custom.blockchain_about') }}" data-scroll="#core">
                                     {{ trans('custom.blockchain_about') }}
                                 </a>
                             </li>
