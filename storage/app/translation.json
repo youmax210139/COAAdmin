@@ -154,5 +154,14 @@
     "對環境友善": "Eco-friendly",
     "沒有農藥殘留": "No pesticides remained",
     "什麼是產銷履歷": "What is food product traceability",
-    "農產品產銷履歷制度": "Agricultural Traceability System"
+    "農產品產銷履歷制度": "Agricultural Traceability System",
+    "臺灣良好農業規範實施及驗證＋履歷追溯體系": "Implementation and Verification of Taiwan Good Agriculture Practice & Agricultural Traceability System",
+    "依據「農產品生產及驗證管理法」所推動的自願性農產品產銷履歷制度，即結合上述兩大國際農產品管制制度， 同時採取臺灣良好農業規範（Taiwan Good AgriculturePractice，簡稱TGAP）的實施與驗證，以及建立履歷追溯體系。 簡言之，購買使用產銷履歷農產品標章的產銷履歷農產品，不只可以從<a href='http://taft.coa.gov.tw' target='_blank'>「產銷履歷農產品資訊網」</a> 查詢到農民的生產紀錄，也代表驗證機構已經為您親赴農民的生產現場，去確認農民所記是否符合所做、所做是否符合規範， 並針對產品行抽驗，而每一批產品的相關紀錄也在驗證機構的監控下，嚴格審視，一有問題就會馬上處置， 因此可以有效降低履歷資料造假的風險，並且有效管控生產過程不傷害環境、產品不傷害人體。":"According to the voluntary agricultural product traceability system implemented by the “Agricultural Production and Certification Act,” we adopt Taiwan Good Agriculture Practice (TGAP) for implementation and verification and establish the product traceability system. In short, agricultural products with labels marked by the traceability system can not only provide us the records of crop growth via <a href='http://taft.coa.gov.tw' target='_blank'>“Agricultural Products Traceability System Website,”</a> but also represent the fact that the verification organization has confirmed if the farming activities follow the regulations on the farmlands; we also sample and inspect the agricultural products. In addition, related records of each batch of product are under the monitoring of verification organizations and are strictly examined. Any problems will be solved once they emerge, which make us able to reduce the risk of forging false information and control the environment of production so that the process of production does not do harm to the environment, and neither do the agricultural products to human bodies.",
+    "什麼是區塊鏈": "What is blockchain",
+    "區塊鏈建立在對等式網路（peer-to-peer，簡稱P2P）上的分散式帳本技術， 參與區塊鏈的用戶可以在自己的電腦上架設一個節點， 與其他節點資料同步資料，應用密碼學的加密技術，實現無法被竄改的資料庫。 因為區塊鏈可以詳細記錄每一筆資料，且可以驗證每一筆資料，用於農產品的產銷履歷非常適合。": "Blockchain is a decentralized-ledger technique which is established on peer-to-peer (P2P) Internet. Participant can set up a node on his or her own computer and update the data together with other nodes. The encryption technique derived from cryptography is applied to realize a dataset which is incorruptible. Due to the reason that blockchain is able to record and verify each set of data in detail, it is suitable to be applied in the traceability system of agricultural products.",
+    "核心價值": "Core values",
+    "區塊鏈詳細記錄每一筆資料，可以作為農產品的溯源資料庫":"Blockchain record each set of data indetail, and is able to serve as the traceable dataset of agricultural products.",
+    "傳統的資料庫由單一的伺服器所控制，區塊鏈則由所有參與的節點共同維護": "Traditional dataset is controlled by a single server, while that with blockchain is controlled and manage by all the nodes from the participants.",
+    "透過密碼學的機制，可以驗證資料的正確性":"The correctness of data can be verified via the mechanism of cryptography.",
+    "資料都是透明的，任何人都可以取得區塊鏈上的資料":"All the data is transparent, and everyone have access to those data put on the blockchain."
 }
