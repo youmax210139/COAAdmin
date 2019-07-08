@@ -58,8 +58,18 @@
                 <div id="m_nav">
                     <div id="menu">
                         <ul class="menu">
-                            <li><a href="{{ route('homes.index','#about') }}" title="什麼是產銷履歷">什麼是產銷履歷</a> </li>
-                            <li><a href="{{ route('homes.index','#core') }}" title="什麼是區塊鏈">什麼是區塊鏈</a> </li>
+                            <li>
+                                <a href="{{ route('homes.index','#about') }}" 
+                                title="{{ trans('custom.traceabilty_about') }}">
+                                    {{ trans('custom.traceabilty_about') }}
+                                </a> 
+                            </li>
+                            <li>
+                                <a href="{{ route('homes.index','#core') }}" 
+                                title="什麼是區塊鏈">
+                                什麼是區塊鏈
+                                </a> 
+                            </li>
                             <li><a href="{{ route('homes.index','#banner') }}" title="如何加入產銷履歷">如何加入產銷履歷</a> </li>
                             <li><a href="{{ route('resumes.inquiry') }}" title="履歷查詢">履歷查詢</a> </li>
                             <li class="{{ empty($request->query())?'active':'' }}">
@@ -83,7 +93,7 @@
     <main id="main">
         <div class="inner">
             @if($logs->isEmpty())
-            <p class="no_results">{{ trans('custom.not_found') }}</p>
+            <p class="no_results">{{ trans('custom.empty_product') }}</p>
             @else
                 @if(!empty($request->query()) && count($products) == 1 && $product= $products[0])
                 <section id="rsu_info">

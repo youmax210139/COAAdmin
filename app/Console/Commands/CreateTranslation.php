@@ -28,7 +28,8 @@ class CreateTranslation extends Command
 
     protected $tables = [
         'product',
-        'task_log'
+        'task_log',
+        'language_line',
     ];
 
     /**
@@ -62,37 +63,35 @@ class CreateTranslation extends Command
                 $table->unique(['table_name', 'column_name', 'foreign_key', 'locale']);
                 $table->timestamps();
             });
-        } else {
-            // 清空數據
-            Translation::on('mysql_admin')->truncate();
         }
+
         //產生資料
         foreach ($this->tables as $table) {
             $model = studly_case($table);
             $model = app("App\Models\\$model");
             foreach ($model->getTranslatableAttributes() as $column) {
                 foreach ($model->get() as $row) {
-                    $this->insertRow($table, $column, $row->getKey(), $row->$column);
+                    $this->updateOrCreateRow($model->getTable(), $column, $row->getKey(), $row->$column);
                 }
             }
         }
     }
 
-    protected function insertRow($table, $column, $foreign_key, $value)
+    protected function updateOrCreateRow($table, $column, $foreign_key, $value)
     {
         $locales = [
-            'en' => $this->translations[$value],
+            'en' => $this->translations[$value]??'',
         ];
         foreach ($locales as $locale => $v) {
-            Translation::on('mysql_admin')->create([
+            Translation::on('mysql_admin')->updateOrCreate([
                 'table_name' => $table,
                 'column_name' => $column,
                 'foreign_key' => $foreign_key,
+            ], [
                 'locale' => $locale,
                 'value' => $v,
                 'default' => $value,
             ]);
         }
-
     }
 }

@@ -89,10 +89,10 @@
                 <div class="img"><img src="images/banner_img.svg"></div>
                 <div class="info">
                     <div class="txt">
-                        <h2>有機農業好處多</h2>
-                        <p>吃的安心</p>
-                        <p>對環境友善</p>
-                        <p>沒有農藥殘留</p>
+                        <h2>{{ trans('custom.slogan_1') }}</h2>
+                        <p>{{ trans('custom.slogan_2') }}</p>
+                        <p>{{ trans('custom.slogan_3') }}</p>
+                        <p>{{ trans('custom.slogan_4') }}</p>
                     </div>
                     <div class="search_box">
                         <form action="{{ route('resumes.index') }}" method="get" autocomplete="off">
@@ -108,7 +108,7 @@
     <main id="main">
         <div class="inner">
             <section id="about">
-                <h2 class="tit"><span>什麼是產銷履歷?</span></h2>
+                <h2 class="tit"><span>{{ trans('custom.traceabilty_about') }}?</span></h2>
                 <div class="con">
                     <h4>
                         農產品產銷履歷制度<br>
