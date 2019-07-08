@@ -19,7 +19,7 @@ class ResumeController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::query();
+        $products = Product::withTranslations();
         if ($request->farm) {
             $products = $products->whereTranslation('farm', urldecode($request->farm));
         }
@@ -65,7 +65,8 @@ class ResumeController extends Controller
      */
     public function inquiry()
     {
-        $farms = Product::distinct('farm')
+        $farms = Product::withTranslations()
+            ->distinct('farm')
             ->orderby('farm')
             ->get()
             ->translate(app()->getLocale())
@@ -84,7 +85,8 @@ class ResumeController extends Controller
         $request->validate([
             'farm' => 'required',
         ]);
-        return Product::distinct("product_name")
+        return Product::withTranslations()
+            ->distinct("product_name")
             ->whereTranslation('farm', urldecode($request->farm))
             ->where('website-enable', 1)
             ->get()
