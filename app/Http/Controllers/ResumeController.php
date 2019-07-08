@@ -29,7 +29,7 @@ class ResumeController extends Controller
         $products = $products->where('website-enable', 1);
         $products = $products->get();
 
-        $logs = TaskLog::with('product')->whereIn('product_id', $products->pluck('product_id'))->orderby('timestamp', 'desc');
+        $logs = TaskLog::with(['product', 'translations'])->whereIn('product_id', $products->pluck('product_id'))->orderby('timestamp', 'desc');
         if (empty($request->query())) {
             $logs = $logs->limit(3);
         }
