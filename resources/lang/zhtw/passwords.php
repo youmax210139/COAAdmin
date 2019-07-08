@@ -1,10 +1,9 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
-    | Password Reset Language Lines
+    | Password Reminder Language Lines
     |--------------------------------------------------------------------------
     |
     | The following language lines are the default lines which match reasons
@@ -12,11 +11,9 @@ return [
     | has failed, such as for an invalid token or invalid new password.
     |
     */
-
-    'password' => 'Passwords must be at least six characters and match the confirmation.',
-    'reset' => 'Your password has been reset!',
-    'sent' => 'We have e-mailed your password reset link!',
-    'token' => 'This password reset token is invalid.',
-    'user' => "We can't find a user with that e-mail address.",
-
+    'password' => '密碼至少要有六個字元且與密碼確認欄位一致。',
+    'reset'    => '密碼已成功重設！',
+    'sent'     => '密碼重設郵件已發送！',
+    'token'    => '密碼重設隨機碼無效。',
+    'user'     => '找不到該 E-mail 對應的使用者。',
 ];

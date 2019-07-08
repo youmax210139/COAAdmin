@@ -83,7 +83,7 @@
     <main id="main">
         <div class="inner">
             @if($logs->isEmpty())
-            <p class="no_results">查詢無結果</p>
+            <p class="no_results">{{ trans('custom.not_found') }}</p>
             @else
                 @if(!empty($request->query()) && count($products) == 1 && $product= $products[0])
                 <section id="rsu_info">
