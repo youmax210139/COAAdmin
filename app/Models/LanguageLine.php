@@ -15,7 +15,7 @@ class LanguageLine extends Model
 
     public static function getTranslationsForGroup(string $locale, string $group): array
     {
-        return  static::query()
+        return  static::withTranslations()
             ->where('group', $group)
             ->get()
             ->reduce(function ($lines, LanguageLine $languageLine) use ($locale) {
