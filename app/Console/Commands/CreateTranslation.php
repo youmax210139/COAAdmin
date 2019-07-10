@@ -61,6 +61,7 @@ class CreateTranslation extends Command
                 $table->text('value')->comment('翻譯');
                 $table->text('default')->comment('原始值');
                 $table->unique(['table_name', 'column_name', 'foreign_key', 'locale']);
+                $table->index(['table_name', 'column_name', 'locale', 'foreign_key']);
                 $table->timestamps();
             });
         }
