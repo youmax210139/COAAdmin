@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>農業產品產銷履歷區塊鏈資訊網</title>
+    <title>{{ trans('custom.page_title') }}</title>
     <!--Web default meta-->
     <meta name="robots" content="index, follow">
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <meta name="author" content="農業產品產銷履歷區塊鏈資訊網">
+    <meta name="author" content="{{ trans('custom.page_title') }}">
     <!--Web css-->
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/animate_min.css') }}" rel="stylesheet">
@@ -64,7 +64,7 @@
         <div class="inner">
             <div id="header_logo">
                 <a href="{{ route('homes.index') }}">
-                    <img src="images/logo.svg" alt="農業產品產銷履歷區塊鏈資訊網">
+                    <img src="images/logo.svg" alt="{{ trans('custom.page_title') }}">
                 </a>
             </div>
             <nav id="header_nav">
@@ -81,9 +81,9 @@
                                     {{ trans('custom.blockchain_about') }}
                                 </a>
                             </li>
-                            <li><a href="#" title="如何加入產銷履歷" >如何加入產銷履歷</a> </li>
-                            <li><a href="{{ route('resumes.inquiry') }}" title="履歷查詢">履歷查詢</a> </li>
-                            <li><a href="{{ route('resumes.index') }}" title="最新履歷">最新履歷</a></li>
+                            <li><a href="#" title="{{ trans('custom.resume_join') }}" >{{ trans('custom.resume_join') }}</a> </li>
+                            <li><a href="{{ route('resumes.inquiry') }}" title="{{ trans('custom.resume_search') }}">{{ trans('custom.resume_search') }}</a> </li>
+                            <li><a href="{{ route('resumes.index') }}" title="{{ trans('custom.resume_latest') }}">{{ trans('custom.resume_latest') }}</a></li>
                         </ul>
                         <label class="switch">
                             <input type="checkbox" id="togBtn" {{ session('locale')=='en'?'checked':'' }}>
@@ -104,9 +104,9 @@
                     </div>
                     <div class="search_box">
                         <form action="{{ route('resumes.index') }}" method="get" autocomplete="off">
-                            <input name="farm" type="text" class="srch_input" placeholder="請輸入農場">
-                            <input name="product" type="text" class="srch_input" placeholder="請輸入作物批號">
-                            <button type="submit" class="ico_enter"><span class="blind">搜尋</span></button>
+                            <input name="farm" type="text" class="srch_input" placeholder="{{ trans('custom.please_enter') }}{{ trans('custom.farm') }}">
+                            <input name="product" type="text" class="srch_input" placeholder="{{ trans('custom.please_enter') }}{{ trans('custom.crop_code') }}">
+                            <button type="submit" class="ico_enter"><span class="blind">{{ trans('custom.search') }}</span></button>
                         </form>
                     </div>
                 </div>
@@ -139,7 +139,7 @@
                         <li>
                             <a href="#">
                                 <span class="img"><img src="{{ asset('images/core_img01.svg') }}"></span>
-                                <span class="txt">可溯源</span>
+                                <span class="txt">{{ trans('custom.traceability') }}</span>
                             </a>
                             <p>{{ trans('custom.core_value_1') }}</p>
                         </li>
@@ -148,7 +148,7 @@
                                 <span class="img">
                                     <img src="{{ asset('images/2.svg') }}">
                                 </span>
-                                <span class="txt">去中心化</span>
+                                <span class="txt">{{ trans('custom.decentralize') }}</span>
                             </a>
                             <p>{{ trans('custom.core_value_2') }}</p>
                         </li>
@@ -157,7 +157,7 @@
                                 <span class="img">
                                     <img src="{{ asset('images/3.svg') }}">
                                 </span>
-                                <span class="txt">無法竄改</span>
+                                <span class="txt">{{ trans('custom.immutability') }}</span>
                             </a>
                             <p>{{ trans('custom.core_value_3') }}</p>
                         </li>
@@ -166,7 +166,7 @@
                                 <span class="img">
                                     <img src="{{ asset('images/4.svg') }}">
                                 </span>
-                                <span class="txt">資料透明</span>
+                                <span class="txt">{{ trans('custom.transparent') }}</span>
                             </a>
                             <p>{{ trans('custom.core_value_4') }}</p>
                         </li>
@@ -178,10 +178,10 @@
     <!--下版-->
     <footer id="footer">
         <div class="inner">
-            <p>行政院農委會 計畫補助</p>
-            <p>國立台灣大學生物環境系統工程學系 維運</p>
-            <p>106 台北市大安區羅斯福路四段1號</p>
-            <p>服務電話：+886-2-33663468</p>
+            <p>{{ trans('custom.sponsor') }}</p>
+            <p>{{ trans('custom.maintain') }}</p>
+            <p>{{ trans('custom.location') }}</p>
+            <p>{{ trans('custom.service_line') }}：+886-2-33663468</p>
         </div>
     </footer>
     <!--Web jquery-->

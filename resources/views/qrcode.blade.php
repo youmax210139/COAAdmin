@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>農業產品產銷履歷區塊鏈資訊網</title>
+    <title>{{ trans('custom.page_title') }}</title>
     <!--Web default meta-->
     <meta name="robots" content="index, follow">
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <meta name="author" content="農業產品產銷履歷區塊鏈資訊網">
+    <meta name="author" content="{{ trans('custom.page_title') }}">
     <!--Web css-->
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/animate_min.css') }}" rel="stylesheet">
@@ -31,18 +31,38 @@
         <div class="inner">
             <div id="header_logo">
                 <a href="{{route('homes.index')}}">
-                    <img src="{{ asset('images/logo.svg') }}" alt="農業產品產銷履歷區塊鏈資訊網">
+                    <img src="{{ asset('images/logo.svg') }}" alt="{{ trans('custom.page_title') }}">
                 </a>
             </div>
             <nav id="header_nav">
                 <div id="m_nav">
                     <div id="menu">
                         <ul class="menu">
-                            <li><a href="{{ route('homes.index','#about') }}" title="什麼是產銷履歷">什麼是產銷履歷</a> </li>
-                            <li><a href="{{ route('homes.index','#core') }}" title="什麼是區塊鏈">什麼是區塊鏈</a> </li>
-                            <li><a href="{{ route('homes.index','#banner') }}" title="如何加入產銷履歷">如何加入產銷履歷</a> </li>
-                            <li class="active"><a href="{{ route('resumes.inquiry') }}" title="履歷查詢">履歷查詢</a> </li>
-                            <li><a href="{{ route('resumes.index') }}" title="最新履歷">最新履歷</a></li>
+                            <li>
+                                <a href="{{ route('homes.index','#about') }}" title="{{ trans('custom.traceabilty_about') }}">
+                                    {{ trans('custom.traceabilty_about') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('homes.index','#core') }}" title="{{ trans('custom.blockchain_about') }}">
+                                    {{ trans('custom.blockchain_about') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('homes.index','#banner') }}" title="{{ trans('custom.resume_join') }}">
+                                    {{ trans('custom.resume_join') }}
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="{{ route('resumes.inquiry') }}" title="{{ trans('custom.resume_search') }}">
+                                {{ trans('custom.resume_search') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('resumes.index') }}" title="{{ trans('custom.resume_latest') }}">
+                                    {{ trans('custom.resume_latest') }}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <a href="javascript:$.pageslide.close()" class="bars_close"></a>
@@ -65,10 +85,10 @@
     <!--下版-->
     <footer id="footer">
         <div class="inner">
-            <p>行政院農委會 計畫補助</p>
-            <p>國立台灣大學生物環境系統工程學系 維運</p>
-            <p>106 台北市大安區羅斯福路四段1號</p>
-            <p>服務電話：+886-2-33663468</p>
+            <p>{{ trans('custom.sponsor') }}</p>
+            <p>{{ trans('custom.maintain') }}</p>
+            <p>{{ trans('custom.location') }}</p>
+            <p>{{ trans('custom.service_line') }}：+886-2-33663468</p>
         </div>
     </footer>
     <!--Web jquery-->

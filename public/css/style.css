@@ -1773,3 +1773,8 @@ div.zabuto_calendar .table tr td.active div.day span.badge
         z-index: 9999;
     }
 }
+
+.resumeInfo #banner .txt.en {
+    line-height: 100%;
+    letter-spacing: inherit;
+}
