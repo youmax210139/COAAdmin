@@ -43,7 +43,6 @@
                                     {{ trans('custom.blockchain_about') }}
                                 </a>
                             </li>
-                            <li><a href="{{ route('homes.index','#banner') }}" title="{{ trans('custom.resume_join') }}">{{ trans('custom.resume_join') }}</a> </li>
                             <li class="active"><a href="{{ route('resumes.inquiry') }}" title="{{ trans('custom.resume_search') }}">{{ trans('custom.resume_search') }}</a> </li>
                             <li><a href="{{ route('resumes.index') }}" title="{{ trans('custom.resume_latest') }}">{{ trans('custom.resume_latest') }}</a></li>
                         </ul>
