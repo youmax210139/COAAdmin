@@ -59,7 +59,7 @@
     <main id="main">
         <div class="inner">
             <section id="rsu_inquire">
-                <div class="tit">
+                <div class="tit {{ session('locale') }}">
                     <h1><span>{{ trans('custom.resume_search') }}</span></h1>
                 </div>
                 <div class="con">

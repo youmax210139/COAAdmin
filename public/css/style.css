@@ -87,6 +87,7 @@ video {
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
+    word-break: keep-all;
 }
 
 /* line 22, ../../../../../fire.app/lib/ruby/compass_1.0/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
@@ -930,6 +931,9 @@ section {
     -webkit-transform: skewX(35deg);
     transform: skewX(35deg);
     display: inline-block;
+}
+#rsu_inquire .tit.en span {
+    letter-spacing: normal;
 }
 /* line 580, ../sass/module/_layout.scss */
 #rsu_inquire .con {
@@ -1776,5 +1780,5 @@ div.zabuto_calendar .table tr td.active div.day span.badge
 
 .resumeInfo #banner .txt.en {
     line-height: 100%;
-    letter-spacing: inherit;
+    letter-spacing: normal;
 }
