@@ -84,7 +84,7 @@
                             <li><a href="{{ route('resumes.inquiry') }}" title="{{ trans('custom.resume_search') }}">{{ trans('custom.resume_search') }}</a> </li>
                             <li><a href="{{ route('resumes.index') }}" title="{{ trans('custom.resume_latest') }}">{{ trans('custom.resume_latest') }}</a></li>
                             <li>
-                                <a href="{{ route('neo4j.view') }}" title="neo4j">
+                                <a href="{{ route('neo4j.view','441748') }}" title="neo4j">
                                     Neo4j
                                 </a>
                             </li>
