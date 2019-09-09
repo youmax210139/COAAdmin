@@ -15,6 +15,29 @@
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/animate_min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <style>
+        .img-container {
+            width: 90%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .img-container a {
+            background: #fbb03b;
+            border: none;
+            font-family: "微軟正黑體";
+            color: #333;
+            font-size: 16px;
+            letter-spacing: 5px;
+            border-radius: 50px;
+            padding: 10px 60px;
+            cursor: pointer;
+        }
+
+        .img-container a:hover {
+            color: #ffffff;
+        }
+    </style>
 </head>
 
 <body id="page" class="resumeInq">
@@ -26,7 +49,8 @@
         <div class="inner">
             <div id="header_logo">
                 <a href="{{route('homes.index')}}">
-                    <img src="{{ asset("images/logo_".app()->getLocale().".svg") }}" alt="{{ trans('custom.page_title') }}">
+                    <img src="{{ asset("images/logo_".app()->getLocale().".svg") }}"
+                        alt="{{ trans('custom.page_title') }}">
                 </a>
             </div>
             <nav id="header_nav">
@@ -34,18 +58,24 @@
                     <div id="menu">
                         <ul class="menu">
                             <li>
-                                <a href="{{ route('homes.index','#about') }}" title="{{ trans('custom.traceabilty_about') }}" data-scroll="#about">
+                                <a href="{{ route('homes.index','#about') }}"
+                                    title="{{ trans('custom.traceabilty_about') }}" data-scroll="#about">
                                     {{ trans('custom.traceabilty_about') }}
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('homes.index','#core') }}" title="{{ trans('custom.blockchain_about') }}" data-scroll="#core">
+                                <a href="{{ route('homes.index','#core') }}"
+                                    title="{{ trans('custom.blockchain_about') }}" data-scroll="#core">
                                     {{ trans('custom.blockchain_about') }}
                                 </a>
                             </li>
-                            <li class="active"><a href="{{ route('resumes.inquiry') }}" title="{{ trans('custom.resume_search') }}">{{ trans('custom.resume_search') }}</a> </li>
-                            <li><a href="{{ route('resumes.index') }}" title="{{ trans('custom.resume_latest') }}">{{ trans('custom.resume_latest') }}</a></li>
-                            <li>
+                            <li><a href="{{ route('resumes.inquiry') }}"
+                                    title="{{ trans('custom.resume_search') }}">{{ trans('custom.resume_search') }}</a>
+                            </li>
+                            <li><a href="{{ route('resumes.index') }}"
+                                    title="{{ trans('custom.resume_latest') }}">{{ trans('custom.resume_latest') }}</a>
+                            </li>
+                            <li class="active">
                                 <a href="{{ route('neo4j.view','441748') }}" title="neo4j">
                                     Neo4j
                                 </a>
@@ -65,39 +95,19 @@
         <div class="inner">
             <section id="rsu_inquire">
                 <div class="tit {{ session('locale') }}">
-                    <h1><span>{{ trans('custom.resume_search') }}</span></h1>
-                </div>
-                <div class="con">
-                    <form action="{{ route('resumes.index') }}" method="get" id="search_form">
-                        <div class="form_group">
-                            <label for="select_teaField">{{ trans('custom.farm') }}</label>
-                            <select class="form-control" id="select_farmField" name="farm">
-                                <option value=''>{{ trans('custom.all') }}</option>
-                                @foreach($farms as $key=>$val)
-                                <option value="{{ urlencode($key) }}">{{ str_replace('"', '', $val) }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div id="errMsg" style="color:red;display:none">
-                            <h3>錯誤:</h3>
-                            <p></p>
-                        </div>
-                        <div class="form_group" id="product_group" style="display:none;">
-                            <label for="select_cropNum">{{ trans('custom.crop_code') }}</label>
-                            <select class="form-control" id="select_productField" name="product">
-                            </select>
-                        </div>
-                        <div class="form_btn">
-                            <div class="submit_btn">
-                                <button type="submit" class="btn">{{ strtolower(trans('custom.search')) }}</button>
-                            </div>
-                            <div class="reset_btn">
-                                <button type="reset" class="btn ">{{ trans('custom.clean') }}</button>
-                            </div>
-                        </div>
-                    </form>
+                    <h1><span>Neo4j</span></h1>
                 </div>
             </section>
+        </div>
+        <div class="img-container">
+            <img src="{{ asset("images/$image.jpg")}}" alt="">
+            @if($previous)
+            <a class="btn" href="{{ route('neo4j.view', $previous)}}" style="margin-right:50px">Previous</a>
+            @endif
+            @if($next)
+            <a class="btn" href="{{ route('neo4j.view', $next)}}">Next</a>
+            @endif
+            
         </div>
     </main>
     <!--下版-->

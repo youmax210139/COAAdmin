@@ -64,7 +64,7 @@
         <div class="inner">
             <div id="header_logo">
                 <a href="{{ route('homes.index') }}">
-                    <img src="images/logo_{{ app()->getLocale() }}.svg" alt="{{ trans('custom.page_title') }}">
+                    <img src="{{ asset("images/logo_".app()->getLocale().".svg") }}" alt="{{ trans('custom.page_title') }}">
                 </a>
             </div>
             <nav id="header_nav">
@@ -83,6 +83,11 @@
                             </li>
                             <li><a href="{{ route('resumes.inquiry') }}" title="{{ trans('custom.resume_search') }}">{{ trans('custom.resume_search') }}</a> </li>
                             <li><a href="{{ route('resumes.index') }}" title="{{ trans('custom.resume_latest') }}">{{ trans('custom.resume_latest') }}</a></li>
+                            <li>
+                                <a href="{{ route('neo4j.view') }}" title="neo4j">
+                                    Neo4j
+                                </a>
+                            </li>
                         </ul>
                         <label class="switch">
                             <input type="checkbox" id="togBtn" {{ session('locale')=='en'?'checked':'' }}>

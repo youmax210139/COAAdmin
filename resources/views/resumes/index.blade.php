@@ -51,7 +51,7 @@
         <div class="inner">
             <div id="header_logo">
                 <a href="{{route('homes.index')}}">
-                    <img src="{{ asset('images/logo_{{ app()->getLocale() }}.svg') }}" alt="{{ trans('custom.page_title') }}">
+                    <img src="{{ asset("images/logo_".app()->getLocale().".svg") }}" alt="{{ trans('custom.page_title') }}">
                 </a>
             </div>
             <nav id="header_nav">
@@ -71,6 +71,11 @@
                             <li><a href="{{ route('resumes.inquiry') }}" title="{{ trans('custom.resume_search') }}">{{ trans('custom.resume_search') }}</a> </li>
                             <li class="{{ empty($request->query())?'active':'' }}">
                                 <a href="{{ route('resumes.index') }}" title="{{ trans('custom.resume_latest') }}">{{ trans('custom.resume_latest') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('neo4j.view','441748') }}" title="neo4j">
+                                    Neo4j
+                                </a>
                             </li>
                         </ul>
                         <label class="switch">
@@ -110,7 +115,7 @@
                                     {{ trans('custom.more_info') }}
                                 </a>
                                 @endif
-                                <a href="{{$product->bc_address??''}}" target="_blank">{{ trans('custom.smart_contract') }}</a>
+                                <a href="{{$product->bc_url??''}}" target="_blank">{{ trans('custom.smart_contract') }}</a>
                             </em>
                         </p>
                     </div>
@@ -123,7 +128,7 @@
                 @foreach($logs as $key => $l)
                 <div class="vfc_box" data-scroll="{{ $l->scrollId }}">
                     <div class="date">{{ $l->date }}</div>
-                    <a href="{{$l->bc_explore_url??''}}" target="_blank" class="vfc_btn_wrapper">
+                    <a href="{{$l->bc_explorer_url??''}}" target="_blank" class="vfc_btn_wrapper">
                         <div class="vfc_btn" id="v_{{ $l->log_id }}">
                             <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                             <div class="text" style="display:none"></div>
