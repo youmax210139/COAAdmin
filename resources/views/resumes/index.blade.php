@@ -103,9 +103,14 @@
                         <p class="Township"><span>{{ trans('custom.town') }}</span><em>{{ $product->town??'--' }}</em></p>
                         <p class="address"><span>{{ trans('custom.address') }}</span><em>{{ $product->address??'--' }}</em></p>
                         <p class="tel"><span>{{ trans('custom.phone') }}</span><em>{{ $product->tel??'--' }}</em></p>
-                        <p class="more"><span></span><em>
-                                <a href="{{$product->more_info_url??'/'}}" target="_blank">{{ trans('custom.more_info') }}</a>
-                                <a href="{{$product->bc_address??'/'}}" target="_blank">{{ trans('custom.smart_contract') }}</a>
+                        <p class="more"><span></span>
+                            <em>
+                                @if(!empty($product->more_info_url))
+                                <a href="{{$product->more_info_url??''}}" target="_blank">
+                                    {{ trans('custom.more_info') }}
+                                </a>
+                                @endif
+                                <a href="{{$product->bc_address??''}}" target="_blank">{{ trans('custom.smart_contract') }}</a>
                             </em>
                         </p>
                     </div>
@@ -118,7 +123,7 @@
                 @foreach($logs as $key => $l)
                 <div class="vfc_box" data-scroll="{{ $l->scrollId }}">
                     <div class="date">{{ $l->date }}</div>
-                    <a href="{{$l->bc_explore_url??'/'}}" target="_blank" class="vfc_btn_wrapper">
+                    <a href="{{$l->bc_explore_url??''}}" target="_blank" class="vfc_btn_wrapper">
                         <div class="vfc_btn" id="v_{{ $l->log_id }}">
                             <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                             <div class="text" style="display:none"></div>
@@ -129,7 +134,11 @@
                         <p class="operators">{{ trans('custom.place') }}:{{ $l->location??'--' }}</p>
                         <p class="tool">{{$l->tool_type??'--'}}:{{ $l->tool??'--' }}</p>
                         <p class="explain">{{ trans('custom.note') }}:{{ $l->remark??'--' }}</p>
-                        <p class="more"><a href="{{$l->product->more_info_url??'/'}}" target="_blank">{{ trans('custom.more_info') }}</a></p>
+                        @if(!empty($l->product->more_info_url))
+                        <p class="more"><a href="{{$l->product->more_info_url??''}}" target="_blank">
+                            {{ trans('custom.more_info') }}</a>
+                        </p>
+                        @endif
                     </div>
                 </div>
                 @endforeach

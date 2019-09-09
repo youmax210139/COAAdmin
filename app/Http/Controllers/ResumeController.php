@@ -26,7 +26,9 @@ class ResumeController extends Controller
         if ($request->product) {
             $products = $products->whereTranslation('product_name', urldecode($request->product));
         }
-        $products = $products->where('website-enable', 1);
+        if ($request->enable) {
+            $products = $products->where('website-enable', $request->enable);
+        }
         $products = $products->get();
 
         $logs = TaskLog::with(['product', 'translations'])->whereIn('product_id', $products->pluck('product_id'))->orderby('timestamp', 'desc');
