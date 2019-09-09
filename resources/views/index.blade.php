@@ -64,7 +64,7 @@
         <div class="inner">
             <div id="header_logo">
                 <a href="{{ route('homes.index') }}">
-                    <img src="images/logo.svg" alt="{{ trans('custom.page_title') }}">
+                    <img src="images/logo_{{ app()->getLocale() }}.svg" alt="{{ trans('custom.page_title') }}">
                 </a>
             </div>
             <nav id="header_nav">
