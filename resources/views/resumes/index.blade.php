@@ -110,9 +110,11 @@
                         <p class="tel"><span>{{ trans('custom.phone') }}</span><em>{{ $product->tel??'--' }}</em></p>
                         <p class="more"><span></span>
                             <em>
+                                @if(!empty($product->more_info_url))
                                 <a href="{{$product->more_info_url??''}}" target="_blank">
                                     {{ trans('custom.more_info') }}
                                 </a>
+                                @endif
                                 <a href="{{$product->bc_url??''}}" target="_blank">{{ trans('custom.smart_contract') }}</a>
                             </em>
                         </p>
