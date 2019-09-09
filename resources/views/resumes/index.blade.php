@@ -139,8 +139,8 @@
                         <p class="operators">{{ trans('custom.place') }}:{{ $l->location??'--' }}</p>
                         <p class="tool">{{$l->tool_type??'--'}}:{{ $l->tool??'--' }}</p>
                         <p class="explain">{{ trans('custom.note') }}:{{ $l->remark??'--' }}</p>
-                        @if(!empty($l->product->more_info_url))
-                        <p class="more"><a href="{{$l->product->more_info_url??''}}" target="_blank">
+                        @if(!empty($l->more_info_url))
+                        <p class="more"><a href="{{$l->more_info_url??''}}" target="_blank">
                             {{ trans('custom.more_info') }}</a>
                         </p>
                         @endif
