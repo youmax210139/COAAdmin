@@ -99,7 +99,15 @@
             @if($logs->isEmpty())
             <p class="no_results">{{ trans('custom.empty_product') }}</p>
             @else
-                @if(!empty($request->query()) && count($products) == 1 && $product= $products[0])
+                @php
+                     if($products->count() == 1){
+                        $product= $products->first();
+                     }
+                     else{
+                        $product= null;
+                     }
+                @endphp
+                @if(!empty($request->query()) && $product)
                 <section id="rsu_info">
                     <div class="info_box">
                         <p class="harvesting"><span>{{ trans('custom.crop_code') }}</span><em>{{ $product->product_name??'--' }}</em></p>
@@ -110,8 +118,8 @@
                         <p class="tel"><span>{{ trans('custom.phone') }}</span><em>{{ $product->tel??'--' }}</em></p>
                         <p class="more"><span></span>
                             <em>
-                                @if(!empty($product->more_info_url))
-                                <a href="{{$product->more_info_url??''}}" target="_blank">
+                                @if(!is_null($product->more_info_url))
+                                <a href="{{$product->more_info_url}}" target="_blank">
                                     {{ trans('custom.more_info') }}
                                 </a>
                                 @endif

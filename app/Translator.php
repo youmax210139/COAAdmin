@@ -154,7 +154,7 @@ class Translator implements ArrayAccess, JsonSerializable
                 return $this->model->$name;
             }
 
-            return;
+            return ;
         }
 
         if (!$this->attributes[$name]['exists'] && !$this->attributes[$name]['modified']) {
