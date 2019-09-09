@@ -12,7 +12,7 @@ class Neo4jController extends Controller
 
         foreach ($images as $i => $v) {
             if ($image == $v) {
-                $next = ($i == 3) ? null : $images[$i + 1];
+                $next = ($i == 2) ? null : $images[$i + 1];
                 $previous = ($i == 0) ? null : $images[$i - 1];
             }
         }
