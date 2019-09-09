@@ -8,7 +8,7 @@ class Neo4jController extends Controller
 {
     public function view($image)
     {
-        $images = ['441748', '441749', '441751', '441752'];
+        $images = ['441748', '441751', '441752'];
 
         foreach ($images as $i => $v) {
             if ($image == $v) {

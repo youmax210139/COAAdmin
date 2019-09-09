@@ -100,12 +100,12 @@
             </section>
         </div>
         <div class="img-container">
-            <img src="{{ asset("images/$image.jpg")}}" alt="">
-            @if($previous)
-            <a class="btn" href="{{ route('neo4j.view', $previous)}}" style="margin-right:50px">Previous</a>
-            @endif
             @if($next)
-            <a class="btn" href="{{ route('neo4j.view', $next)}}">Next</a>
+            <a href="{{ route('neo4j.view', $next)}}">
+            <img src="{{ asset("images/$image.jpg")}}" alt="">
+            </a>
+            @else 
+            <img src="{{ asset("images/$image.jpg")}}" alt="">
             @endif
             
         </div>
