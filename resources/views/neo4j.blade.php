@@ -75,11 +75,13 @@
                             <li><a href="{{ route('resumes.index') }}"
                                     title="{{ trans('custom.resume_latest') }}">{{ trans('custom.resume_latest') }}</a>
                             </li>
+                            @if(config('setting.neo4j'))
                             <li class="active">
                                 <a href="{{ route('neo4j.view','441748') }}" title="neo4j">
                                     Neo4j
                                 </a>
                             </li>
+                            @endif
                         </ul>
                         <label class="switch">
                             <input type="checkbox" id="togBtn" {{ session('locale')=='en'?'checked':'' }}>
