@@ -18,12 +18,13 @@
     <style>
         #core .con {
           color: #666666;
-          word-break: normal;
+          word-break: break-all;
           font-size: 16px;
           line-height: 24px;
         }
         #core .con p{
           margin-bottom: 30px;
+          word-break: break-all;
         }
 
         #core .con li p{
