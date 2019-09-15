@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Good;
 use App\Models\Product;
 use App\Models\TaskLog;
 use Carbon\Carbon;
@@ -25,6 +26,9 @@ class ResumeController extends Controller
         }
         if ($request->product) {
             $products = $products->whereTranslation('product_name', urldecode($request->product));
+        }
+        if ($request->good) {
+            $products = $products->where('goods_id', $request->good);
         }
         if ($request->enable) {
             $products = $products->where('website-enable', $request->enable);
@@ -67,13 +71,11 @@ class ResumeController extends Controller
      */
     public function inquiry()
     {
-        $farms = Product::withTranslations()
-            ->distinct('farm')
-            ->orderby('farm')
+        $goods = Good::withTranslations()
             ->get()
             ->translate(app()->getLocale())
-            ->pluck('farm', 'farm');
-        return view('resumes.inquiry', compact(['farms']));
+            ->pluck('goods_name', 'goods_id');
+        return view('resumes.inquiry', compact('goods'));
     }
 
     /**
@@ -85,11 +87,11 @@ class ResumeController extends Controller
     public function product(Request $request)
     {
         $request->validate([
-            'farm' => 'required',
+            'good' => 'required',
         ]);
         return Product::withTranslations()
             ->distinct("product_name")
-            ->whereTranslation('farm', urldecode($request->farm))
+            ->where('goods_id', $request->good)
             ->where('website-enable', 1)
             ->get()
             ->translate(app()->getLocale())

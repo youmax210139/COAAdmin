@@ -32,11 +32,11 @@
                 <div class="con">
                     <form action="{{ route('resumes.index') }}" method="get" id="search_form">
                         <div class="form_group">
-                            <label for="select_teaField">{{ trans('custom.farm') }}</label>
-                            <select class="form-control" id="select_farmField" name="farm">
+                            <label for="select_teaField">{{ trans('custom.good') }}</label>
+                            <select class="form-control" id="select_goodField" name="good">
                                 <option value=''>{{ trans('custom.all') }}</option>
-                                @foreach($farms as $key=>$val)
-                                <option value="{{ urlencode($key) }}">{{ str_replace('"', '', $val) }}</option>
+                                @foreach($goods as $key=>$val)
+                                <option value="{{ $key }}">{{ str_replace('"', '', $val) }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -83,10 +83,10 @@
             $('.reset_btn').click(function (e) {
                 e.preventDefault();
                 $errMsg.hide();
-                $select_farmField.val(null).change();
+                $select_goodField.val(null).change();
             })
 
-            var $select_farmField = $('#select_farmField');
+            var $select_goodField = $('#select_goodField');
             var $product_group = $('#product_group');
             var $select_productField = $('#select_productField');
             var $submit_btn = $('.submit_btn .btn');
@@ -99,15 +99,15 @@
                 $search_form.submit();
             });
 
-            $select_farmField.val('').change();
+            $select_goodField.val('').change();
 
-            $select_farmField.change(function () {
+            $select_goodField.change(function () {
                 $errMsg.hide();
                 var value = $(this).val();
                 $product_group.hide();
                 $select_productField.html("").prop('disabled', 'disabled');
                 if (value) {
-                    $select_farmField.prop('disabled', 'disabled');
+                    $select_goodField.prop('disabled', 'disabled');
                     $submit_btn.prop('disabled', 'disabled');
                     var $ajaxError = function(r, textStatus, err){
                         var e = JSON.parse(r.responseText);
@@ -117,7 +117,7 @@
                     $.ajax({
                         url: "{{ route('resumes.product') }}",
                         type: 'GET',
-                        data: {farm: value},
+                        data: {good: value},
                         success: function (response, textStatus, jqXhr) {
                             if(response.length == 0){
                                 return $ajaxError({"responseText":"{\"errors\":\"{{__('custom.empty_product')}}\"}"}, textStatus, null);
@@ -131,7 +131,7 @@
                         },
                         error: $ajaxError,
                         complete: function () {
-                            $select_farmField.prop('disabled', false);
+                            $select_goodField.prop('disabled', false);
                             $submit_btn.prop('disabled', false);
                         }
                     });
