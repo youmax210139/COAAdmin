@@ -173,7 +173,6 @@
                     next: '<i class="fa fa-angle-right"></i>'
                 },
                 action: function () {
-                    $fromCard = false;
                     return onDateSelected(this.id, false);
                 },
             });
@@ -209,18 +208,17 @@
             $("#" + id).addClass('active');
             var date = $("#" + id).data("date");
             var hasEvent = $("#" + id).data("hasEvent");
-            if (hasEvent && !$fromCard) {
+            if (hasEvent) {
                 $('#verification').scrollTo('[data-scroll='+date+']:first', 1000, 'swing');
                 selectResume($('[data-scroll='+date+']:first'));
             }
         }
         var $productInfo = $('#rsu_info');
         var $productAlert = $('p.no_results');
-        var $fromCard = false;
         
         $('#verification .vfc_box').click(function(){
-            $fromCard = true;
-            $("#"+$calendar.attr('id')+"_"+$(this).attr('data-scroll')).click();
+            $(".zabuto_calendar .table td.active").removeClass('active');
+            $("#"+$calendar.attr('id')+"_"+$(this).attr('data-scroll')).addClass('active');
             selectResume($(this));
         });
 
