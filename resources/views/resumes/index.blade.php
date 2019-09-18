@@ -217,8 +217,29 @@
         var $productAlert = $('p.no_results');
         
         $('#verification .vfc_box').click(function(){
+            $calendar.empty();
+            $("#search").append("<div id='calendar'></div>")
+            var dates = $(this).attr('data-scroll').split('-');
+            $calendar = $("#calendar").zabuto_calendar({
+                language: "en",
+                data: @json($dates),
+                today: false,
+                show_days: true,
+                year: dates[0],
+                month: dates[1],
+                weekstartson: 1,
+                cell_border: true,
+                nav_icon: {
+                    prev: '<i class="fa fa-angle-left"></i>',
+                    next: '<i class="fa fa-angle-right"></i>'
+                },
+                action: function () {
+                    return onDateSelected(this.id, false);
+                },
+            });
             $(".zabuto_calendar .table td.active").removeClass('active');
             $("#"+$calendar.attr('id')+"_"+$(this).attr('data-scroll')).addClass('active');
+            // $("#"+$calendar.attr('id')+"_"+$(this).attr('data-scroll')).click();
             selectResume($(this));
         });
 
