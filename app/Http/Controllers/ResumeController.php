@@ -71,11 +71,33 @@ class ResumeController extends Controller
      */
     public function inquiry()
     {
-        $goods = Good::withTranslations()
+        $farms = Product::withTranslations()
+            ->distinct('farm')
+            ->orderby('farm')
+            ->get()
+            ->translate(app()->getLocale())
+            ->pluck('farm', 'farm');
+        return view('resumes.inquiry', compact(['farms']));
+    }
+
+    /**
+     * 取得 product_name
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function good(Request $request)
+    {
+        $request->validate([
+            'farm' => 'required',
+        ]);
+        return Good::withTranslations()
+            ->distinct("goods_name")
+            ->whereTranslation('farm', urldecode($request->farm))
+            ->where('website-enable', 1)
             ->get()
             ->translate(app()->getLocale())
             ->pluck('goods_name', 'goods_id');
-        return view('resumes.inquiry', compact('goods'));
     }
 
     /**
@@ -87,15 +109,13 @@ class ResumeController extends Controller
     public function product(Request $request)
     {
         $request->validate([
-            'good' => 'required',
+            'id' => 'required',
         ]);
         return Product::withTranslations()
-            ->distinct("product_name")
-            ->where('goods_id', $request->good)
-            ->where('website-enable', 1)
-            ->get()
-            ->translate(app()->getLocale())
-            ->pluck('product_name', 'product_name');
+            ->where('product_id', $request->id)
+            // ->where('website-enable', 1)
+            ->firstOrFail()
+            ->translate(app()->getLocale());
     }
     /**
      * 取得驗証資料

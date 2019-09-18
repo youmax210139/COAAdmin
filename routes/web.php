@@ -21,6 +21,8 @@ Route::group([
     Route::get('/resumes/inquiry', 'ResumeController@inquiry')->name('resumes.inquiry');
     #取得 product_name
     Route::get('/resumes/product', 'ResumeController@product')->name('resumes.product');
+    #取得 good_name
+    Route::get('/resumes/good', 'ResumeController@good')->name('resumes.good');
     #取得驗証資料
     Route::get('/resumes/validation', 'ResumeController@validation')->name('resumes.validation');
     #Demo

@@ -32,11 +32,11 @@
                 <div class="con">
                     <form action="{{ route('resumes.index') }}" method="get" id="search_form">
                         <div class="form_group">
-                            <label for="select_teaField">{{ trans('custom.good') }}</label>
-                            <select class="form-control" id="select_goodField" name="good">
+                            <label for="select_teaField">{{ trans('custom.farm') }}</label>
+                            <select class="form-control" id="select_farmField" name="farm">
                                 <option value=''>{{ trans('custom.all') }}</option>
-                                @foreach($goods as $key=>$val)
-                                <option value="{{ $key }}">{{ str_replace('"', '', $val) }}</option>
+                                @foreach($farms as $key=>$val)
+                                <option value="{{ urlencode($key) }}">{{ str_replace('"', '', $val) }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -44,9 +44,9 @@
                             <h3>錯誤:</h3>
                             <p></p>
                         </div>
-                        <div class="form_group" id="product_group" style="display:none;">
+                        <div class="form_group" id="good_group" style="display:none;">
                             <label for="select_cropNum">{{ trans('custom.crop_code') }}</label>
-                            <select class="form-control" id="select_productField" name="product">
+                            <select class="form-control" id="select_goodField" name="good">
                             </select>
                         </div>
                         <div class="form_btn">
@@ -83,12 +83,12 @@
             $('.reset_btn').click(function (e) {
                 e.preventDefault();
                 $errMsg.hide();
-                $select_goodField.val(null).change();
+                $select_farmField.val(null).change();
             })
 
+            var $select_farmField = $('#select_farmField');
+            var $good_group = $('#good_group');
             var $select_goodField = $('#select_goodField');
-            var $product_group = $('#product_group');
-            var $select_productField = $('#select_productField');
             var $submit_btn = $('.submit_btn .btn');
             var $errMsg = $('#errMsg');
             var $search_form = $('#search_form');
@@ -99,15 +99,15 @@
                 $search_form.submit();
             });
 
-            $select_goodField.val('').change();
+            $select_farmField.val('').change();
 
-            $select_goodField.change(function () {
+            $select_farmField.change(function () {
                 $errMsg.hide();
                 var value = $(this).val();
-                $product_group.hide();
-                $select_productField.html("").prop('disabled', 'disabled');
+                $good_group.hide();
+                $select_goodField.html("").prop('disabled', 'disabled');
                 if (value) {
-                    $select_goodField.prop('disabled', 'disabled');
+                    $select_farmField.prop('disabled', 'disabled');
                     $submit_btn.prop('disabled', 'disabled');
                     var $ajaxError = function(r, textStatus, err){
                         var e = JSON.parse(r.responseText);
@@ -115,23 +115,23 @@
                     };
 
                     $.ajax({
-                        url: "{{ route('resumes.product') }}",
+                        url: "{{ route('resumes.good') }}",
                         type: 'GET',
-                        data: {good: value},
+                        data: {farm: value},
                         success: function (response, textStatus, jqXhr) {
                             if(response.length == 0){
-                                return $ajaxError({"responseText":"{\"errors\":\"{{__('custom.empty_product')}}\"}"}, textStatus, null);
+                                return $ajaxError({"responseText":"{\"errors\":\"{{__('custom.empty_good')}}\"}"}, textStatus, null);
                             }
-                            for(var key in response) {
-                                $select_productField.append("<option value="+ encodeURI(key) + ">" + key + "</option>")
-                            }
-                            $select_productField.prop('disabled', false);
-                            $product_group.show();
+                            $.each(response, function(key,val){
+                                $select_goodField.append("<option value="+ encodeURI(key) + ">" + val + "</option>")
+                            });
+                            $select_goodField.prop('disabled', false);
+                            $good_group.show();
                             // console.log(response);
                         },
                         error: $ajaxError,
                         complete: function () {
-                            $select_goodField.prop('disabled', false);
+                            $select_farmField.prop('disabled', false);
                             $submit_btn.prop('disabled', false);
                         }
                     });

@@ -18,25 +18,29 @@
     <link href="{{ asset('calendar/zabuto_calendar.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <style>
-        .no_results{
+        .no_results {
             text-align: center;
             font-weight: 800;
             font-size: 28px;
             color: red;
         }
-        .info_box .more a:nth-child(2){
+
+        .info_box .more a:nth-child(2) {
             margin-left: 10%;
         }
+
         .info_box .more a,
-        .vfc_txt .more a{
+        .vfc_txt .more a {
             color: #2F6156;
             font-weight: 600;
         }
+
         .info_box .more a:visited,
-        .vfc_txt .more a:visited{
+        .vfc_txt .more a:visited {
             color: #990088;
         }
-        #verification .vfc_btn a{
+
+        #verification .vfc_btn a {
             color: white;
         }
     </style>
@@ -56,60 +60,73 @@
     </div>
     <main id="main">
         <div class="inner">
-            @if($logs->isEmpty())
-            <p class="no_results">{{ trans('custom.empty_product') }}</p>
-            @else
-                @php
-                     if($products->count() == 1){
-                        $product= $products->first();
-                     }
-                     else{
-                        $product= null;
-                     }
-                @endphp
-                @if(!empty($request->query()) && $product)
-                <section id="rsu_info">
-                    <div class="info_box">
-                        <p class="harvesting"><span>{{ trans('custom.crop_code') }}</span><em>{{ $product->product_name??'--' }}</em></p>
-                        <p class="farm"><span>{{ trans('custom.farm') }}</span><em>{{ $product->farm??'--' }}</em></p>
-                        <p class="city"><span>{{ trans('custom.city') }}</span><em>{{ $product->city??'--' }}</em></p>
-                        <p class="Township"><span>{{ trans('custom.town') }}</span><em>{{ $product->town??'--' }}</em></p>
-                        <p class="address"><span>{{ trans('custom.address') }}</span><em>{{ $product->address??'--' }}</em></p>
-                        <p class="tel"><span>{{ trans('custom.phone') }}</span><em>{{ $product->tel??'--' }}</em></p>
-                        <p class="more"><span></span>
-                            <em>
-                                @if(!is_null($product->more_info_url))
-                                <a href="{{$product->more_info_url}}" target="_blank">
-                                    {{ trans('custom.more_info') }}
-                                </a>
-                                @endif
-                                <a href="{{$product->bc_url??''}}" target="_blank">{{ trans('custom.smart_contract') }}</a>
-                            </em>
-                        </p>
-                    </div>
-                </section>
-                @endif
+            <p class="no_results" style="{{ $logs->isEmpty()?'':'display:none' }}">{{ trans('custom.empty_product') }}
+            </p>
+            @if(!$logs->isEmpty())
+            <section id="rsu_info" style="display:none">
+                <div class="info_box">
+                    <p class="harvesting">
+                        <span>{{ trans('custom.crop_code') }}</span>
+                        <em></em>
+                    </p>
+                    <p class="farm">
+                        <span>{{ trans('custom.farm') }}</span>
+                        <em></em>
+                    </p>
+                    <p class="city">
+                        <span>{{ trans('custom.city') }}</span>
+                        <em></em>
+                    </p>
+                    <p class="Township">
+                        <span>{{ trans('custom.town') }}</span>
+                        <em></em>
+                    </p>
+                    <p class="address"><span>
+                            {{ trans('custom.address') }}</span>
+                        <em></em>
+                    </p>
+                    <p class="tel">
+                        <span>{{ trans('custom.phone') }}</span>
+                        <em></em>
+                    </p>
+                    <p class="more">
+                        <span></span>
+                        <em></em>
+                    </p>
+                </div>
+            </section>
             <section id="search">
                 <div id="calendar"></div>
             </section>
             <section id="verification">
                 @foreach($logs as $key => $l)
-                <div class="vfc_box" data-scroll="{{ $l->scrollId }}">
+                <div class="vfc_box" data-scroll="{{ $l->scrollId }}" data-product="{{ $l->product->product_id }}">
                     <div class="date">{{ $l->date }}</div>
                     <a href="{{$l->bc_explorer_url??''}}" target="_blank" class="vfc_btn_wrapper">
                         <div class="vfc_btn" id="v_{{ $l->log_id }}">
-                            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                            <div class="lds-ring">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
                             <div class="text" style="display:none"></div>
                         </div>
                     </a>
                     <div class="vfc_txt">
+                        <p class="crop_code more">
+                            <a href="{{ route('resumes.index', [ 'product_name'=>urlencode($l->product->product_name??'')])}}" 
+                                target="_blank">
+                            {{ trans('custom.crop_code') }}:{{ $l->product->product_name??'--' }}
+                            </a>
+                        </p>
                         <p class="project">{{ trans('custom.event') }}:{{ $l->task??'--' }}</p>
                         <p class="operators">{{ trans('custom.place') }}:{{ $l->location??'--' }}</p>
                         <p class="tool">{{$l->tool_type??'--'}}:{{ $l->tool??'--' }}</p>
                         <p class="explain">{{ trans('custom.note') }}:{{ $l->remark??'--' }}</p>
                         @if(!empty($l->more_info_url))
                         <p class="more"><a href="{{$l->more_info_url??''}}" target="_blank">
-                            {{ trans('custom.more_info') }}</a>
+                                {{ trans('custom.more_info') }}</a>
                         </p>
                         @endif
                     </div>
@@ -156,6 +173,7 @@
                     next: '<i class="fa fa-angle-right"></i>'
                 },
                 action: function () {
+                    $fromCard = false;
                     return onDateSelected(this.id, false);
                 },
             });
@@ -185,15 +203,63 @@
             });
             @endif
         });
-
+        // 選擇日期事件
         function onDateSelected(id, fromModal) {
             $(".zabuto_calendar .table td.active").removeClass('active');
             $("#" + id).addClass('active');
             var date = $("#" + id).data("date");
             var hasEvent = $("#" + id).data("hasEvent");
-            if (hasEvent) {
+            if (hasEvent && !$fromCard) {
                 $('#verification').scrollTo('[data-scroll='+date+']:first', 1000, 'swing');
+                selectResume($('[data-scroll='+date+']:first'));
             }
+        }
+        var $productInfo = $('#rsu_info');
+        var $productAlert = $('p.no_results');
+        var $fromCard = false;
+        
+        $('#verification .vfc_box').click(function(){
+            $fromCard = true;
+            $("#"+$calendar.attr('id')+"_"+$(this).attr('data-scroll')).click();
+            selectResume($(this));
+        });
+
+        function selectResume(resume){
+            $('#verification .vfc_box.active').removeClass('active');
+            resume.addClass('active');
+            var id = resume.attr('data-product');
+            $productInfo.hide();
+            $productAlert.html("\
+            <div class='lds-ring'>\
+                <div></div>\
+                <div></div>\
+                <div></div>\
+                <div></div>\
+            </div>").show();
+            $.get( "{{ route('resumes.product')}}?id="+id, function() {
+                    // alert( "success" );
+                })
+                .done(function(data) {
+                    $productAlert.hide();
+                    $productInfo.find('p.harvesting em').text( data.product_name || '--' );
+                    $productInfo.find('p.farm em').text( data.farm || '--' );
+                    $productInfo.find('p.city em').text( data.city || '--' );
+                    $productInfo.find('p.Township em').text( data.town || '--' );
+                    $productInfo.find('p.address em').text( data.address || '--' );
+                    $productInfo.find('p.tel em').text( data.tel || '--' );
+                    var more = $productInfo.find('p.more em').html('');
+                    if(data.more_info_url){
+                        more.append("<a href='"+ data.more_info_url + "' target='_blank'>{{ trans('custom.more_info') }}</a>")
+                    }
+                    if(data.bc_url == null || data.bc_url == ""){
+                        data.bc_url = "";
+                    }
+                    more.append("<a href='"+ data.bc_url + "' target='_blank'>{{ trans('custom.smart_contract') }}</a>");
+                    $productInfo.show();
+                })
+                .fail(function(data) {
+                    $productAlert.text(data.responseJSON.message);
+                })
         }
 
     </script>
