@@ -115,7 +115,7 @@
                     </a>
                     <div class="vfc_txt">
                         <p class="crop_code more">
-                            <a href="{{ route('resumes.index', [ 'product_name'=>urlencode($l->product->product_name??'')])}}" 
+                            <a href="{{ route('resumes.index', [ 'product'=>$l->product_id??'' ])}}" 
                                 target="_blank">
                             {{ trans('custom.crop_code') }}:{{ $l->product->product_name??'--' }}
                             </a>
@@ -246,7 +246,13 @@
         function selectResume(resume){
             $('#verification .vfc_box.active').removeClass('active');
             resume.addClass('active');
+            @if(request()->good)
+            var id = {{ request()->good }};
+            var type = 'good';
+            @else
             var id = resume.attr('data-product');
+            var type = 'product';
+            @endif
             $productInfo.hide();
             $productAlert.html("\
             <div class='lds-ring'>\
@@ -255,12 +261,12 @@
                 <div></div>\
                 <div></div>\
             </div>").show();
-            $.get( "{{ route('resumes.product')}}?id="+id, function() {
+            $.get( "{{ route('resumes.product')}}?id="+id+"&type="+type, function() {
                     // alert( "success" );
                 })
                 .done(function(data) {
                     $productAlert.hide();
-                    $productInfo.find('p.harvesting em').text( data.product_name || '--' );
+                    $productInfo.find('p.harvesting em').text( data.product_name|| data.goods_name || '--' );
                     $productInfo.find('p.farm em').text( data.farm || '--' );
                     $productInfo.find('p.city em').text( data.city || '--' );
                     $productInfo.find('p.Township em').text( data.town || '--' );

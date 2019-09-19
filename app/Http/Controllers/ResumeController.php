@@ -8,6 +8,7 @@ use App\Models\TaskLog;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class ResumeController extends Controller
@@ -21,18 +22,29 @@ class ResumeController extends Controller
     public function index(Request $request)
     {
         $products = Product::withTranslations();
+
         if ($request->farm) {
             $products = $products->whereTranslation('farm', urldecode($request->farm));
         }
+
         if ($request->product) {
+            $products = $products->where('product_id', $request->product);
+        }
+
+        if ($request->product_name) {
             $products = $products->whereTranslation('product_name', urldecode($request->product));
         }
+
         if ($request->good) {
-            $products = $products->where('goods_id', $request->good);
+            $products = $products->whereHas('goods', function (Builder $query) use ($request) {
+                $query->where('product_goods.goods_id', $request->good);
+            });
         }
+
         if ($request->enable) {
             $products = $products->where('website-enable', $request->enable);
         }
+
         $products = $products->get();
 
         $logs = TaskLog::with(['product', 'translations'])->whereIn('product_id', $products->pluck('product_id'))->orderby('timestamp', 'desc');
@@ -110,12 +122,24 @@ class ResumeController extends Controller
     {
         $request->validate([
             'id' => 'required',
+            'type' => 'required',
         ]);
-        return Product::withTranslations()
-            ->where('product_id', $request->id)
-            // ->where('website-enable', 1)
-            ->firstOrFail()
-            ->translate(app()->getLocale());
+        switch ($request->type) {
+            case 'good':
+                return Good::withTranslations()
+                    ->where('goods_id', $request->id)
+                // ->where('website-enable', 1)
+                    ->firstOrFail()
+                    ->translate(app()->getLocale());
+            case 'product':
+                return Product::withTranslations()
+                    ->where('product_id', $request->id)
+                // ->where('website-enable', 1)
+                    ->firstOrFail()
+                    ->translate(app()->getLocale());
+            default:
+                return [];
+        }
     }
     /**
      * 取得驗証資料

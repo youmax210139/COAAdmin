@@ -17,4 +17,9 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\TaskLog', 'product_id', 'product_id');
     }
+
+    public function goods()
+    {
+        return $this->belongsToMany('App\Models\Good', 'product_goods', 'product_id', 'goods_id');
+    }
 }
