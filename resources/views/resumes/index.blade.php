@@ -269,8 +269,8 @@
         function selectResume(resume){
             $('#verification .vfc_box.active').removeClass('active');
             resume.addClass('active');
-            @if(request()->good)
-            var id = {{ request()->good }};
+            @if(request()->goods)
+            var id = {{ request()->goods }};
             var type = 'good';
             @else
             var id = resume.attr('data-product');

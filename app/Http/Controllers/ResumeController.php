@@ -35,9 +35,9 @@ class ResumeController extends Controller
             $products = $products->whereTranslation('product_name', urldecode($request->product));
         }
 
-        if ($request->good) {
+        if ($request->goods) {
             $products = $products->whereHas('goods', function (Builder $query) use ($request) {
-                $query->where('product_goods.goods_id', $request->good);
+                $query->where('product_goods.goods_id', $request->goods);
             });
         }
 
