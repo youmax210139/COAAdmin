@@ -43,6 +43,13 @@
         #verification .vfc_btn a {
             color: white;
         }
+        h3.harvesting{
+            font-size: 1.4em;
+            text-align: center;
+            color: #333;
+            letter-spacing: 5px;
+            font-weight: inherit;
+        }
     </style>
 </head>
 
@@ -65,10 +72,8 @@
             @if(!$logs->isEmpty())
             <section id="rsu_info" style="display:none">
                 <div class="info_box">
-                    <p class="harvesting">
-                        <span>{{ trans('custom.crop_code') }}</span>
-                        <em></em>
-                    </p>
+                    <h3 class="harvesting">
+                    </h3>
                     <p class="farm">
                         <span>{{ trans('custom.farm') }}</span>
                         <em></em>
@@ -120,13 +125,31 @@
                             {{ trans('custom.crop_code') }}:{{ $l->product->product_name??'--' }}
                             </a>
                         </p>
-                        <p class="project">{{ trans('custom.event') }}:{{ $l->task??'--' }}</p>
-                        <p class="operators">{{ trans('custom.place') }}:{{ $l->location??'--' }}</p>
-                        <p class="tool">{{$l->tool_type??'--'}}:{{ $l->tool??'--' }}</p>
-                        <p class="explain">{{ trans('custom.note') }}:{{ $l->remark??'--' }}</p>
+                        <p class="project more">
+                            <a href="{{ $l->task_url??'' }}" target="_blank">
+                                {{ trans('custom.event') }}:{{ $l->task??'--' }}
+                            </a>
+                        </p>
+                        <p class="operators more">
+                            <a href="{{ $l->location_url??'' }}" target="_blank">
+                                {{ trans('custom.place') }}:{{ $l->location??'--' }}
+                            </a>
+                        </p>
+                        <p class="tool more">
+                            <a href="{{ $l->tool_url??'' }}" target="_blank">
+                                {{$l->tool_type??'--'}}:{{ $l->tool??'--' }}
+                            </a>
+                        </p>
+                        <p class="explain">
+                            <a href="{{ $l->remark_url??'' }}" target="_blank">
+                            {{ trans('custom.note') }}:{{ $l->remark??'--' }}
+                            </a>
+                        </p>
                         @if(!empty($l->more_info_url))
-                        <p class="more"><a href="{{$l->more_info_url??''}}" target="_blank">
-                                {{ trans('custom.more_info') }}</a>
+                        <p class="more">
+                            <a href="{{$l->more_info_url??''}}" target="_blank">
+                                {{ trans('custom.more_info') }}
+                            </a>
                         </p>
                         @endif
                     </div>
@@ -266,7 +289,7 @@
                 })
                 .done(function(data) {
                     $productAlert.hide();
-                    $productInfo.find('p.harvesting em').text( data.product_name|| data.goods_name || '--' );
+                    $productInfo.find('h3.harvesting').text( data.product_name|| data.goods_name || '--' );
                     $productInfo.find('p.farm em').text( data.farm || '--' );
                     $productInfo.find('p.city em').text( data.city || '--' );
                     $productInfo.find('p.Township em').text( data.town || '--' );
