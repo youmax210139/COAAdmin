@@ -83,7 +83,7 @@ class ResumeController extends Controller
      */
     public function inquiry()
     {
-        $farms = Product::withTranslations()
+        $farms = Good::withTranslations()
             ->distinct('farm')
             ->orderby('farm')
             ->get()
