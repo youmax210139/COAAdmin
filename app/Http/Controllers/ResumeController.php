@@ -86,6 +86,7 @@ class ResumeController extends Controller
         $farms = Good::withTranslations()
             ->distinct('farm')
             ->orderby('farm')
+            ->where('website-enable', 1)
             ->get()
             ->translate(app()->getLocale())
             ->pluck('farm', 'farm');
