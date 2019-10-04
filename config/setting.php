@@ -2,6 +2,6 @@
 
 return [
 
-    'neo4j' => false
+    'neo4j' => true,
 
 ];

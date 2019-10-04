@@ -15,6 +15,7 @@
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/animate_min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/popoto/dist/popoto.min.css">
     <style>
         .img-container {
             width: 90%;
@@ -78,6 +79,7 @@
     <script src="{{ asset('js/jquery-1.11.3.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/jquery_pageslide_min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popoto/dist/popoto.min.js"></script>
     <script>
         $(document).ready(function () {
             $("#rwd_nav").pageslide({

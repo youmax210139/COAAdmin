@@ -26,7 +26,8 @@ Route::group([
     #取得驗証資料
     Route::get('/resumes/validation', 'ResumeController@validation')->name('resumes.validation');
     #Demo
-    Route::get('/neo4j/{image}', 'Neo4jController@view')->name('neo4j.view');
+    // Route::get('/neo4j/{image}', 'Neo4jController@view')->name('neo4j.view');
+    Route::get('/neo4j', 'Neo4jController@index')->name('neo4j.index');
     #二維碼
     Route::get('/qrcode', function () {
         return view('qrcode');

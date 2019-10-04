@@ -6,6 +6,11 @@ use App;
 
 class Neo4jController extends Controller
 {
+    public function index()
+    {
+        return view('neo4j.index', compact('image', 'next', 'previous'));
+    }
+
     public function view($image)
     {
         $images = ['441748', '441751', '441752'];
