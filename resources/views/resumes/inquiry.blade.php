@@ -45,8 +45,8 @@
                             <p></p>
                         </div>
                         <div class="form_group" id="good_group" style="display:none;">
-                            <label for="select_cropNum">{{ trans('custom.crop_code') }}</label>
-                            <select class="form-control" id="select_goodField" name="good">
+                            <label for="select_cropNum">{{ trans('custom.product_code') }}</label>
+                            <select class="form-control" id="select_goodField" name="goods">
                             </select>
                         </div>
                         <div class="form_btn">

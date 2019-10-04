@@ -26,7 +26,7 @@
                                 {{ trans('custom.resume_search') }}
                             </a>
                         </li>
-                        <li class="{{ (request()->route()->getName()=='resumes.index')?'active':'' }}">
+                        <li class="{{ (request()->route()->getName()=='resumes.index'&&empty($request->query()))?'active':'' }}">
                             <a href="{{ route('resumes.index') }}"
                                 title="{{ trans('custom.resume_latest') }}">
                                 {{ trans('custom.resume_latest') }}

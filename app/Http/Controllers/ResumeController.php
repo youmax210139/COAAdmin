@@ -35,9 +35,9 @@ class ResumeController extends Controller
             $products = $products->whereTranslation('product_name', urldecode($request->product));
         }
 
-        if ($request->good) {
+        if ($request->goods) {
             $products = $products->whereHas('goods', function (Builder $query) use ($request) {
-                $query->where('product_goods.goods_id', $request->good);
+                $query->where('product_goods.goods_id', $request->goods);
             });
         }
 
@@ -83,9 +83,10 @@ class ResumeController extends Controller
      */
     public function inquiry()
     {
-        $farms = Product::withTranslations()
+        $farms = Good::withTranslations()
             ->distinct('farm')
             ->orderby('farm')
+            ->where('website-enable', 1)
             ->get()
             ->translate(app()->getLocale())
             ->pluck('farm', 'farm');
