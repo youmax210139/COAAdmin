@@ -34,7 +34,12 @@
             color: #2F6156;
             font-weight: 600;
         }
-
+        .vfc_txt .more a:hover{
+            cursor: pointer;
+        }
+        .vfc_txt .more:hover{
+            cursor: auto;
+        }
         .info_box .more a:visited,
         .vfc_txt .more a:visited {
             color: #990088;
@@ -120,30 +125,50 @@
                     </a>
                     <div class="vfc_txt">
                         <p class="crop_code more">
-                            <a href="{{ route('resumes.index', [ 'product'=>$l->product_id??'' ])}}" 
+                            @if($l->product_id)
+                            <a href="{{ route('resumes.index', [ 'product'=>$l->product_id ])}}" 
                                 target="_blank">
                             {{ trans('custom.crop_code') }}:{{ $l->product->product_name??'--' }}
                             </a>
+                            @else 
+                            {{ trans('custom.crop_code') }}:{{ $l->product->product_name??'--' }}
+                            @endif
                         </p>
                         <p class="project more">
-                            <a href="{{ $l->task_url??'' }}" target="_blank">
+                            @if($l->task_url)
+                            <a href="{{ $l->task_url }}" target="_blank">
                                 {{ trans('custom.event') }}:{{ $l->task??'--' }}
                             </a>
+                            @else 
+                                {{ trans('custom.event') }}:{{ $l->task??'--' }}
+                            @endif
                         </p>
                         <p class="operators more">
-                            <a href="{{ $l->location_url??'' }}" target="_blank">
+                            @if($l->location_url)
+                            <a href="{{ $l->location_url }}" target="_blank">
                                 {{ trans('custom.place') }}:{{ $l->location??'--' }}
                             </a>
+                            @else
+                                {{ trans('custom.place') }}:{{ $l->location??'--' }}
+                            @endif
                         </p>
                         <p class="tool more">
-                            <a href="{{ $l->tool_url??'' }}" target="_blank">
+                            @if($l->tool_url)
+                            <a href="{{ $l->tool_url }}" target="_blank">
                                 {{$l->tool_type??'--'}}:{{ $l->tool??'--' }}
                             </a>
+                            @else
+                                {{$l->tool_type??'--'}}:{{ $l->tool??'--' }}
+                            @endif
                         </p>
-                        <p class="explain">
-                            <a href="{{ $l->remark_url??'' }}" target="_blank">
+                        <p class="explain more">
+                            @if($l->remark_url)
+                            <a href="{{ $l->remark_url }}" target="_blank">
                             {{ trans('custom.note') }}:{{ $l->remark??'--' }}
                             </a>
+                            @else
+                            {{ trans('custom.note') }}:{{ $l->remark??'--' }}
+                            @endif
                         </p>
                         @if(!empty($l->more_info_url))
                         <p class="more">
