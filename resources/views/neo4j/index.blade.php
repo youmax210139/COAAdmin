@@ -91,6 +91,7 @@
         </div>
     </footer>
     <script src="https://unpkg.com/jquery" charset="utf-8"></script>
+    <script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
     <script src="https://unpkg.com/d3" charset="utf-8"></script>
     <script src="https://cdn.jsdelivr.net/npm/popoto/dist/popoto.min.js"></script>
     <script>
@@ -128,6 +129,11 @@
             "autoExpandRelations": true // if set to true Person nodes will be automatically expanded in graph
         },
         "產品": {
+            "returnAttributes": ["name"],
+            "constraintAttribute": "name",
+            "autoExpandRelations": true // if set to true Person nodes will be automatically expanded in graph
+        },
+        "品種": {
             "returnAttributes": ["name"],
             "constraintAttribute": "name",
             "autoExpandRelations": true // if set to true Person nodes will be automatically expanded in graph

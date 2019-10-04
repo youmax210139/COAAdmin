@@ -33,7 +33,7 @@
                             </a>
                         </li>
                         @if(config('setting.neo4j'))
-                        <li class="{{ (request()->route()->getName()=='neo4j.view')?'active':'' }}">
+                        <li class="{{ (request()->route()->getName()=='neo4j.index')?'active':'' }}">
                             <a href="{{ route('neo4j.index') }}" title="neo4j">
                                 Neo4j
                             </a>
