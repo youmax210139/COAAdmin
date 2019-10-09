@@ -96,6 +96,7 @@
             $submit_btn.click(function(e){
                 $errMsg.hide();
                 $submit_btn.prop('disabled', 'disabled');
+                $select_farmField.prop("disabled", "disabled");
                 $search_form.submit();
             });
 
