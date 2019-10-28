@@ -36,6 +36,9 @@
             width: 100%;
             height: 100%;
         }
+        .ppt-taxo-ul .ppt-label{
+            color: white;
+        }
     </style>
 </head>
 
