@@ -73,7 +73,7 @@ class ResumeController extends Controller
             $dates[] = ['date' => null];
         }
         $logs = $logs->translate(app()->getLocale());
-        return view('resumes.index', compact(['logs', 'latest', 'dates', 'year', 'month', 'products']));
+        return view('resumes.index', compact(['logs', 'dates', 'year', 'month', 'products']));
     }
 
     /**
@@ -158,10 +158,11 @@ class ResumeController extends Controller
             'base_uri' => env('VALID_API_URL'),
         ]);
         foreach ($request->products as $id) {
-            $promise = $client->postAsync('/check_by_product_id', [
+            $promise = $client->postAsync('api/check_by_product_id', [
                 'form_params' => [
                     'product_id' => $id,
                 ],
+                'verify' => false,
             ]);
             $promises[] = $promise;
         }
@@ -171,8 +172,9 @@ class ResumeController extends Controller
             if ($res->getStatusCode() != 200) {
                 continue;
             }
-            foreach (json_decode($res->getBody(), true) as $v) {
-                $response[$v['log_id']] = $v['result'];
+            $logs = json_decode($res->getBody(), true);
+            foreach ($logs as $log) {
+                $response[$log['log_id']] = $log['result'];
             }
         }
         return $response;

@@ -46,5 +46,5 @@ sudo service apache2 restart
 ## .ENV 設定
 
 ```shell
-VALID_API_URL = 127.0.0.1:3333 # 驗証作物調用的API地址
+VALID_API_URL = 127.0.0.1 # 驗証作物調用的API地址
 ```
